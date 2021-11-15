@@ -28,7 +28,7 @@ class CategoryController extends Controller
     }
     public function test3()
     {
-
+        echo "test";
     }
 
     /**

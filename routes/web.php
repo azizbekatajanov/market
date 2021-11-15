@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('productes.product');
+    return view('index');
+});
+Route::/*middleware('auth.web')->*/prefix('dashboard')->group(function (){
+    Route::get('/', [MainController::class, 'index']);
 });

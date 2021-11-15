@@ -26,6 +26,10 @@ class CategoryController extends Controller
     {
         echo "sdagffsdgsdf";
     }
+    public function test3()
+    {
+
+    }
 
     /**
      * Show the form for creating a new resource.

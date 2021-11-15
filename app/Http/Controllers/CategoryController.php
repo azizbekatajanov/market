@@ -18,6 +18,11 @@ class CategoryController extends Controller
     }
 
 
+    public function test2()
+    {
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

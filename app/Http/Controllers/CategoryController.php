@@ -19,12 +19,12 @@ class CategoryController extends Controller
 
     public function test()
     {
-        
+
     }
 
     public function test2()
     {
-        
+        echo "sdagffsdgsdf";
     }
 
     /**

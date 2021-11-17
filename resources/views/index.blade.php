@@ -4,6 +4,9 @@
 @endsection
 @section('body')
 
+    {{$add= file_get_contents('http://127.0.0.1:8000/api/category')}}
+
+{{$add}}
     <div class="menu menu_mm trans_300">
         <div class="menu_container menu_mm">
             <div class="page_menu_content">

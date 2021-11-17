@@ -21,3 +21,6 @@ Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
 ]);
+Route::apiResources([
+    'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
+]);

@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Cont;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+        return Cont::all();
     }
 
     /**
@@ -26,10 +27,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
-        return $category;
+        $cont = new Cont();
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
     }
 
     /**
@@ -40,8 +44,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return $category;
+        $cont = Cont::findOrFail($id);
+        if($cont) return $cont;
+        else 'not found';
     }
 
     /**
@@ -53,10 +58,13 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::findOrfail($id);
-        $category->name = $request->name;
-        $category->save();
-        return $category;
+        $cont = Cont::findOrFail($id);
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
     }
 
     /**
@@ -67,7 +75,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
-        return "Successfully deleted";
+        Cont::findOrFail($id)->delete();
+        return "Deleted";
     }
 }

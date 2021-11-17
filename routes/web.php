@@ -14,9 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 Route::/*middleware('auth.web')->*/prefix('dashboard')->group(function (){
     Route::get('/', [MainController::class, 'index']);
 });
+
+Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);

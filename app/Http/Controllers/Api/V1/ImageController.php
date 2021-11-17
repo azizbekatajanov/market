@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $categor_all=Category::all();
-        return $categor_all;
+       return Image::all();
     }
 
     /**
@@ -38,7 +37,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+       $show =Image::findOrFail($id);
+       return $show;
     }
 
     /**

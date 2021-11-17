@@ -8,9 +8,6 @@
 @section('body')
 
     <div class="super_container">
-
-        <!-- Header -->
-
         <header class="header">
             <div class="header_container">
                 <div class="container">

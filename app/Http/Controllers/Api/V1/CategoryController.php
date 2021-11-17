@@ -27,7 +27,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $add= new Category();
+         return ""
     }
 
     /**

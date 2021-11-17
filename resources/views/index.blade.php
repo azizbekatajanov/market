@@ -27,10 +27,12 @@
                     <li class="page_menu_item has-children menu_mm">
                         <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
                         <ul class="page_menu_selection menu_mm">
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                            <div id="app">
+                                <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                                <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                            </div>
                         </ul>
                     </li>
                     <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
@@ -362,18 +364,20 @@
 
     <script  src="{{mix('js/app.js')}}"  ></script>
     <script>
-        // const db  = axios.get('https://jsonplaceholder.typicode.com/todos/1')
-        //     .then(async res => await console.log(res))
 
-        let result = ''
-        async function getDb(){
-            const db = axios.get('https://jsonplaceholder.typicode.com/todos/1')
-            const {data} = await db
-
-            document.querySelector('.parent').innerHTML = JSON.stringify(data)
-
-        }
-        getDb()
+        new Vue({
+            el: '#app',
+            methods: {
+                async getDb(){
+                    const db = axios.get('https://jsonplaceholder.typicode.com/todos/1')
+                    const {data} = await db
+                    console.log(db);
+                }
+            },
+            created() {
+                this.getDb()
+            }
+        })
     </script>
 
 @endsection

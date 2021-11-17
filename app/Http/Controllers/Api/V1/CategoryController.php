@@ -28,7 +28,8 @@ class CategoryController extends Controller
     {
         $category = new Category();
         $category->name = $request->name;
-        return "Successfully added";
+        $category->save();
+        return $category;
     }
 
     /**
@@ -66,7 +67,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id)->delete();
+        Category::findOrFail($id)->delete();
         return "Successfully deleted";
     }
 }

@@ -20,3 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
 ]);
+Route::apiResources([
+    'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
+]);

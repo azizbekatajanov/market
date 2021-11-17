@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cont;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class ContactController extends Controller
      */
     public function index()
     {
-        //
+        return Cont::all();
     }
 
     /**
@@ -24,44 +25,47 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-//    public function store(Request $request)
-//    {
-//        $cart = new Cart();
-//        $cart->firstname = $request->firstname;
-//        $cart->lastname = $request->lastname;
-//        $cart->subject = $request->subject;
-//        $cart->message = $request->message;
-//        $cart->save();
-//        return "success";
-//    }
-//
-//    /**
-//     * Display the specified resource.
-//     *
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function show($id)
-//    {
-//        $cart = Cart::findOrFail($id);
-//        if($cart) return $cart;
-//        else 'not found';
-//    }
-//
-//    /**
-//     * Update the specified resource in storage.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @param  int  $id
-//     * @return \Illuminate\Http\Response
-//     */
-//    public function update(Request $request, $id)
-//    {
-//        $cart = Cart::findOrFail($id);
-//        $cart->row1 = $request->row1;
-//        $cart->row2 = $request->row2;
-//        $cart->row3 = $request->row3;
-//    }
+    public function store(Request $request)
+    {
+        $cont = new Cont();
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $cont = Cont::findOrFail($id);
+        if($cont) return $cont;
+        else 'not found';
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $cont = Cont::findOrFail($id);
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -71,6 +75,7 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Cont::findOrFail($id)->delete();
+        return "Deleted";
     }
 }

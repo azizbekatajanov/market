@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Resources\Dashboard\CategoryResource;
-use App\Models\Category;
+use App\Http\Requests\ImageRequest;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+        return Image::all();
     }
 
     /**
@@ -26,10 +25,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(ImageRequest $request)
     {
-        $category = Category::create($request->validated());
-        return new CategoryResource($category);
+        $image= new Image();
+        $image->name = $request->name;
+        $image->product_id = $request->product_id;
+        $image->save();
+        return $image;
     }
 
     /**
@@ -40,7 +42,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return new CategoryResource(Category::findOrFail($id));
+        $show =Image::findOrFail($id);
+        return $show;
     }
 
     /**
@@ -50,11 +53,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request,Category $category)
+    public function update(ImageRequest $request, $id)
     {
-        $category->update($request->validated());
-
-        return new CategoryResource($category);
+        $image=Image::findOrFail($id);
+        $image->name = $request->name;
+        $image->product_id = $request->product_id;
+        $image->save();
     }
 
     /**
@@ -65,7 +69,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
+        Image::findOrFail($id)->delete();
         return "Successfully deleted";
     }
 }

@@ -27,3 +27,6 @@ Route::apiResources([
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
 ]);
+Route::apiResources([
+    'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
+]);

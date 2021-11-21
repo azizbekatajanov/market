@@ -15,8 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $category_all=Category::all();
+
+        $category_all=Category::all();
         return $category_all;
+
     }
 
     /**
@@ -27,7 +29,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -38,8 +40,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $CategoruShow= Category::findOrFail($id);
-        return $CategoruShow;
+
+        $category = Category::findOrFail($id);
+        return $category;
+
     }
 
     /**
@@ -51,7 +55,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -62,6 +66,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return "Successfully deleted";
     }
 }

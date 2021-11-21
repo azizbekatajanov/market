@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-
+       $ProductAll= Product::with('image')->paginate(12);
+       return $ProductAll;
     }
 
     /**
@@ -36,7 +38,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $ProductOne = Product::with('image')->find($id);
+        return $ProductOne;
     }
 
     /**

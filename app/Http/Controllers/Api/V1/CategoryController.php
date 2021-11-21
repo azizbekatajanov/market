@@ -38,7 +38,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $CategoruShow= Category::findOrFail($id);
+        return $CategoruShow;
     }
 
     /**

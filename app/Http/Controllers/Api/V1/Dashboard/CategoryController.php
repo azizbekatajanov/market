@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\Dashboard\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -15,8 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $category_all=Category::all();
-        return $category_all;
+        return CategoryResource::collection(Category::all());
     }
 
     /**
@@ -25,9 +26,10 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $category = Category::create($request->validated());
+        return new CategoryResource($category);
     }
 
     /**
@@ -38,8 +40,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $CategoruShow= Category::findOrFail($id);
-        return $CategoruShow;
+        return new CategoryResource(Category::findOrFail($id));
     }
 
     /**
@@ -49,9 +50,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request,Category $category)
     {
-        //
+        $category->update($request->validated());
+
+        return new CategoryResource($category);
     }
 
     /**

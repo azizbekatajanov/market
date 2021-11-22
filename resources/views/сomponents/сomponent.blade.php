@@ -13,8 +13,8 @@
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
     <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="styles/responsive.css">
-    <!-- vue js -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     @yield('head')
 </head>
 <header class="header">
@@ -36,14 +36,11 @@
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li class="hassubs">
+                                {{--  axios for categories --}}
+                                <li class="hassubs" id="app">
                                     <a href="categories.html">Categories</a>
                                     <ul>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
+                                        <li v-for="category in categories" ><a href="/@{{ category.id }}">@{{ category.name }}</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Accessories</a></li>
@@ -165,6 +162,25 @@
 <script src="plugins/easing/easing.js"></script>
 <script src="plugins/parallax-js-master/parallax.min.js"></script>
 <script src="js/custom.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            text: '',
+            categories: []
+        },
+        methods: {
+            async getCategories(){
+                const { data: categories } = await axios.get('/api/category');
+                this.categories = categories.data;
+            }
+        },
+        // async created() {
+        //     await this.getCategories();
+        //     await console.log('categories from component', this.categories)
+        // }
+    })
+</script>
 @yield('script')
 </body>
 </html>

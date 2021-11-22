@@ -3,8 +3,7 @@
 
 @endsection
 @section('body')
-
-    <div class="menu menu_mm trans_300">
+    <div class="menu menu_mm trans_300" >
         <div class="menu_container menu_mm">
             <div class="page_menu_content">
 
@@ -27,12 +26,10 @@
                     <li class="page_menu_item has-children menu_mm">
                         <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
                         <ul class="page_menu_selection menu_mm">
-                            <div id="app">
                                 <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
                                 <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
                                 <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
                                 <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
-                            </div>
                         </ul>
                     </li>
                     <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
@@ -55,7 +52,6 @@
     </div>
 
     <!-- Home -->
-
     <div class="home">
         <div class="home_slider_container">
 
@@ -175,6 +171,9 @@
     </div>
 
     <!-- Products -->
+    <h1 style="color: red; font-size: 100px; text-align: center;">
+
+    </h1>
 
     <div class="products">
         <div class="container">
@@ -266,6 +265,9 @@
         </div>
     </div>
 
+        <h1 style="color: red; font-size: 150px">
+            @{{ categories }}
+        </h1>
     <!-- Ad -->
 
     <div class="avds_xl">
@@ -357,27 +359,12 @@
 
 
 
-
 @endsection
 
 @section('script')
 
-    <script  src="{{mix('js/app.js')}}"  ></script>
     <script>
 
-        new Vue({
-            el: '#app',
-            methods: {
-                async getDb(){
-                    const db = axios.get('https://jsonplaceholder.typicode.com/todos/1')
-                    const {data} = await db
-                    console.log(db);
-                }
-            },
-            created() {
-                this.getDb()
-            }
-        })
     </script>
 
 @endsection

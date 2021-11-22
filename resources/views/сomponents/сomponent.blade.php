@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sublime project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" href="{{asset('styles/bootstrap4/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -14,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('styles/main_styles.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('styles/responsive.css')}}">
     <script src=" {{asset('https://cdn.jsdelivr.net/npm/vue@2.6.14')}}"></script>
+
     @yield('head')
 </head>
 <header class="header">
@@ -35,14 +37,11 @@
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li class="hassubs">
+                                {{--  axios for categories --}}
+                                <li class="hassubs" id="app">
                                     <a href="categories.html">Categories</a>
                                     <ul>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
+                                        <li v-for="category in categories" ><a href="/@{{ category.id }}">@{{ category.name }}</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Accessories</a></li>
@@ -164,6 +163,25 @@
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('js/custom.js')}}"></script>
 
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            text: '',
+            categories: []
+        },
+        methods: {
+            async getCategories(){
+                const { data: categories } = await axios.get('/api/category');
+                this.categories = categories.data;
+            }
+        },
+        // async created() {
+        //     await this.getCategories();
+        //     await console.log('categories from component', this.categories)
+        // }
+    })
+</script>
 @yield('script')
 </body>
 </html>

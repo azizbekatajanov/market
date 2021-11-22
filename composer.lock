@@ -886,6 +886,7 @@
         {
             "name": "laravel/framework",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "v8.73.0",
             "source": {
                 "type": "git",
@@ -897,6 +898,8 @@
                 "url": "https://api.github.com/repos/laravel/framework/zipball/f60e5ceccac453864edbf001b665450886cda8fc",
                 "reference": "f60e5ceccac453864edbf001b665450886cda8fc",
 =======
+=======
+>>>>>>> 0b565508b4533df040cbddddef256bfa6616f6b5
             "version": "v8.71.0",
             "source": {
                 "type": "git",
@@ -907,7 +910,10 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/d822426d75ecf8e8ccd3ccd404db7202d1a9875e",
                 "reference": "d822426d75ecf8e8ccd3ccd404db7202d1a9875e",
+<<<<<<< HEAD
 >>>>>>> be3286fbf1759c6f7fb47a8024f22b31b5275355
+=======
+>>>>>>> 0b565508b4533df040cbddddef256bfa6616f6b5
                 "shasum": ""
             },
             "require": {
@@ -1067,10 +1073,14 @@
                 "source": "https://github.com/laravel/framework"
             },
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2021-11-19T14:10:17+00:00"
 =======
             "time": "2021-11-16T15:00:50+00:00"
 >>>>>>> be3286fbf1759c6f7fb47a8024f22b31b5275355
+=======
+            "time": "2021-11-16T15:00:50+00:00"
+>>>>>>> 0b565508b4533df040cbddddef256bfa6616f6b5
         },
         {
             "name": "laravel/sanctum",
@@ -2158,30 +2168,30 @@
         },
         {
             "name": "psr/log",
-            "version": "2.0.0",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376"
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/ef29f6d262798707a9edd554e2b82517ef3a9376",
-                "reference": "ef29f6d262798707a9edd554e2b82517ef3a9376",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/d49695b909c3b7628b6289db5479a1c204601f11",
+                "reference": "d49695b909c3b7628b6289db5479a1c204601f11",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.0"
+                "php": ">=5.3.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Psr\\Log\\": "src"
+                    "Psr\\Log\\": "Psr/Log/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -2202,9 +2212,9 @@
                 "psr-3"
             ],
             "support": {
-                "source": "https://github.com/php-fig/log/tree/2.0.0"
+                "source": "https://github.com/php-fig/log/tree/1.1.4"
             },
-            "time": "2021-07-14T16:41:46+00:00"
+            "time": "2021-05-03T11:20:27+00:00"
         },
         {
             "name": "psr/simple-cache",

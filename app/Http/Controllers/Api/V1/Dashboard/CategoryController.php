@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category=Category::with('product')->paginate(1)->select('id','name');
+        $category = Category::with('product')->paginate(1)->select('id','name');
         return $category;
     }
 

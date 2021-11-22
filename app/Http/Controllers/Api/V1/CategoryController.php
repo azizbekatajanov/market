@@ -15,8 +15,6 @@ class CategoryController extends Controller
      */
     public function index()
     {
-
-
         $category_all=Category::with('product')->paginate(12);
         return $category_all;
     }
@@ -29,7 +27,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -40,10 +37,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-
         $category = Category::findOrFail($id);
         return $category;
-
     }
 
     /**

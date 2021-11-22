@@ -13,7 +13,7 @@ class HomeController extends Controller
 
     public function product($id){
 
-        return view('productes.product');
+        return view('productes.product',compact('id'));
     }
 
 

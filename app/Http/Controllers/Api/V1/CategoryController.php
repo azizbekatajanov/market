@@ -15,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::all();
+
+        $category=Category::with('product')->paginate(1);
+        return $category;
     }
 
     /**
@@ -26,10 +28,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
-        return $category;
+
     }
 
     /**
@@ -53,10 +52,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::findOrfail($id);
-        $category->name = $request->name;
-        $category->save();
-        return $category;
+
     }
 
     /**
@@ -67,7 +63,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
-        return "Successfully deleted";
+
     }
 }

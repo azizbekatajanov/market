@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Http\Requests\CategoryRequest;
+use App\Http\Resources\Dashboard\CategoryResource;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +17,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-         return Product::all();
+        $category=Category::with('product')->paginate(1)->select('id','name');
+        return $category;
     }
 
     /**
@@ -24,9 +27,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $category = Category::create($request->validated());
+        return new CategoryResource($category);
     }
 
     /**
@@ -37,8 +41,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $show =Product::findOrFail($id);
-        return $show;
+        return new CategoryResource(Category::findOrFail($id));
     }
 
     /**
@@ -48,9 +51,11 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request,Category $category)
     {
-        //
+        $category->update($request->validated());
+
+        return new CategoryResource($category);
     }
 
     /**

@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-         return Product::all();
+        
     }
 
     /**
@@ -37,8 +36,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $show =Product::findOrFail($id);
-        return $show;
+        //
     }
 
     /**

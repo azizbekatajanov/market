@@ -16,12 +16,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        
-=======
+
         $ProductAll= Product::with('image')->paginate(12);
         return $ProductAll;
->>>>>>> 1f220bc44a85f98dccc9bbe3c8e592797ff6102d
+
     }
 
     /**

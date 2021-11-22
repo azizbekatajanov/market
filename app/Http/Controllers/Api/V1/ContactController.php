@@ -27,13 +27,7 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $cont = new Cont();
-        $cont->first_name = $request->first_name;
-        $cont->last_name = $request->last_name;
-        $cont->subject = $request->subject;
-        $cont->message = $request->message;
-        $cont->save();
-        return $cont;
+
     }
 
     /**
@@ -58,13 +52,7 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $cont = Cont::findOrFail($id);
-        $cont->first_name = $request->first_name;
-        $cont->last_name = $request->last_name;
-        $cont->subject = $request->subject;
-        $cont->message = $request->message;
-        $cont->save();
-        return $cont;
+
     }
 
     /**
@@ -75,7 +63,6 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        Cont::findOrFail($id)->delete();
-        return "Deleted";
+
     }
 }

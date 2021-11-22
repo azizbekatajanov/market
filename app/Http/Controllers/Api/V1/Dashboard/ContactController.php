@@ -3,12 +3,11 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryRequest;
-use App\Http\Resources\Dashboard\CategoryResource;
-use App\Models\Category;
+use App\Http\Requests\ContactRequest;
+use App\Models\Cont;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category=Category::with('product')->paginate(1)->select('id','name');
-        return $category;
+        return Cont::all();
     }
 
     /**
@@ -27,10 +25,15 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryRequest $request)
+    public function store(ContactRequest $request)
     {
-        $category = Category::create($request->validated());
-        return new CategoryResource($category);
+        $cont = new Cont();
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
     }
 
     /**
@@ -41,7 +44,9 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return new CategoryResource(Category::findOrFail($id));
+        $cont = Cont::findOrFail($id);
+        if($cont) return $cont;
+        else 'not found';
     }
 
     /**
@@ -51,11 +56,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoryRequest $request,Category $category)
+    public function update(ContactRequest $request, $id)
     {
-        $category->update($request->validated());
-
-        return new CategoryResource($category);
+        $cont = Cont::findOrFail($id);
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
     }
 
     /**
@@ -66,7 +75,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::findOrFail($id)->delete();
-        return "Successfully deleted";
+        Cont::findOrFail($id)->delete();
+        return "Deleted";
     }
 }

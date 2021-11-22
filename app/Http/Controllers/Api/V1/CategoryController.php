@@ -16,8 +16,9 @@ class CategoryController extends Controller
     public function index()
     {
 
-        $category=Category::with('product')->paginate(1);
-        return $category;
+
+        $category_all=Category::all();
+        return $category_all;
     }
 
     /**
@@ -39,8 +40,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+
         $category = Category::findOrFail($id);
         return $category;
+
     }
 
     /**

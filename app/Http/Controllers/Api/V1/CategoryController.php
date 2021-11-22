@@ -17,7 +17,7 @@ class CategoryController extends Controller
     {
 
 
-        $category_all=Category::all();
+        $category_all=Category::with('product')->paginate(12);
         return $category_all;
     }
 

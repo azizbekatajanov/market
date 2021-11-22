@@ -1,13 +1,16 @@
 @extends('.сomponents.сomponent')
 @section('head')
 
-    <link rel="stylesheet" type="text/css" href="styles/product.css">
-    <link rel="stylesheet" type="text/css" href="styles/product_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('styles/product.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('styles/product_responsive.css')}}">
 
 @endsection
 @section('body')
 
     <div class="super_container">
+
+        <!-- Header -->
+
         <header class="header">
             <div class="header_container">
                 <div class="container">

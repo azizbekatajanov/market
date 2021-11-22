@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::prefix('dashboard')->group(function (){
+    Route::apiResources([
+        'category'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
+    ]);
+});
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
+    'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
+    'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
+]);
+Route::apiResources([
+    'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
 ]);

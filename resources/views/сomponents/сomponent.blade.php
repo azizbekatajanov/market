@@ -15,6 +15,15 @@
     <link rel="stylesheet" type="text/css" href="styles/responsive.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('styles/bootstrap4/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.theme.default.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('styles/main_styles.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('styles/responsive.css')}}">
+    <script src=" {{asset('https://cdn.jsdelivr.net/npm/vue@2.6.14')}}"></script>
+>>>>>>> 8ff712483e94550e234259a93be35f242e4a5042
     @yield('head')
 </head>
 <header class="header">
@@ -147,21 +156,20 @@
         </div>
     </div>
 </footer>
-</div>
+<script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+<script src="{{asset('styles/bootstrap4/popper.js')}}"></script>
+<script src="{{asset('styles/bootstrap4/bootstrap.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/TweenMax.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/TimelineMax.min.js')}}"></script>
+<script src="{{asset('plugins/scrollmagic/ScrollMagic.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/animation.gsap.min.js')}}"></script>
+<script src="{{asset('plugins/greensock/ScrollToPlugin.min.js')}}"></script>
+<script src="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.js')}}"></script>
+<script src="{{asset('plugins/Isotope/isotope.pkgd.min.js')}}"></script>
+<script src="{{asset('plugins/easing/easing.js')}}"></script>
+<script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
+<script src="{{asset('js/custom.js')}}"></script>
 
-<script src="js/jquery-3.2.1.min.js"></script>
-<script src="styles/bootstrap4/popper.js"></script>
-<script src="styles/bootstrap4/bootstrap.min.js"></script>
-<script src="plugins/greensock/TweenMax.min.js"></script>
-<script src="plugins/greensock/TimelineMax.min.js"></script>
-<script src="plugins/scrollmagic/ScrollMagic.min.js"></script>
-<script src="plugins/greensock/animation.gsap.min.js"></script>
-<script src="plugins/greensock/ScrollToPlugin.min.js"></script>
-<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
-<script src="plugins/easing/easing.js"></script>
-<script src="plugins/parallax-js-master/parallax.min.js"></script>
-<script src="js/custom.js"></script>
 <script>
     new Vue({
         el: '#app',
@@ -181,6 +189,7 @@
         // }
     })
 </script>
+
 @yield('script')
 </body>
 </html>

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,8 +17,8 @@ class ProductController extends Controller
     public function index()
     {
 
-       $ProductAll= Product::with('image')->paginate(12);
-       return $ProductAll;
+        $ProductAll= Product::with('image')->paginate(12);
+        return $ProductAll;
 
     }
 
@@ -27,9 +28,17 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $product= new Product();
+        $product->name=$request->name;
+        $product->price=$request->price;
+        $product->old_price=$request->old_price;
+        $product->availability=$request->availability;
+        $product->count=$request->count;
+        $product->category_id=$request->category_id;
+        $product->save();
+        return $product;
     }
 
     /**
@@ -40,7 +49,6 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
         $ProductOne = Product::with('image')->find($id);
         return $ProductOne;
     }
@@ -52,9 +60,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $product=Product::findOrFail($id);
+        $product->name=$request->name;
+        $product->price=$request->price;
+        $product->old_price=$request->old_price;
+        $product->availability=$request->availability;
+        $product->count=$request->count;
+        $product->category_id=$request->category_id;
+        $product->save();
+        return $product;
     }
 
     /**
@@ -65,6 +81,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Product::findOrFail($id)->delete();
+        return "Successfully deleted";
     }
 }

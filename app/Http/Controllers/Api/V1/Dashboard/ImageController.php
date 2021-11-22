@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Http\Requests\ImageRequest;
+use App\Models\Image;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-       $ProductAll= Product::with('image')->paginate(12);
-       return $ProductAll;
-
+        return Image::all();
     }
 
     /**
@@ -27,9 +25,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImageRequest $request)
     {
-        //
+        $image= new Image();
+        $image->name = $request->name;
+        $image->product_id = $request->product_id;
+        $image->save();
+        return $image;
     }
 
     /**
@@ -40,9 +42,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
-        $ProductOne = Product::with('image')->find($id);
-        return $ProductOne;
+        $show =Image::findOrFail($id);
+        return $show;
     }
 
     /**
@@ -52,9 +53,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ImageRequest $request, $id)
     {
-        //
+        $image=Image::findOrFail($id);
+        $image->name = $request->name;
+        $image->product_id = $request->product_id;
+        $image->save();
     }
 
     /**
@@ -65,6 +69,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Image::findOrFail($id)->delete();
+        return "Successfully deleted";
     }
 }

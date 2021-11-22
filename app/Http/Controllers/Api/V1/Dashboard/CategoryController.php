@@ -17,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return CategoryResource::collection(Category::all());
+        $category=Category::with('product')->paginate(1)->select('id','name');
+        return $category;
     }
 
     /**
@@ -65,6 +66,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return "Successfully deleted";
     }
 }

@@ -357,6 +357,7 @@
 
 {{--{{$add}}--}}
    <div id="home-page">
+       <h1>@{{ categories }}</h1>
        <div class="menu menu_mm trans_300">
            <div class="menu_container menu_mm">
                <div class="page_menu_content">
@@ -728,8 +729,8 @@
             },
             methods: {
                 async getProducts() {
-                    const { data: categories } = await axios.get('/api/category')
-                    this.categories = categories
+                    const { data: response } = await axios.get('/api/category')
+                    this.categories = response
                 }
             },
             created() {

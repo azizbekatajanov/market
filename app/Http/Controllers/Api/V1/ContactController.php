@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\Cont;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-       $ProductAll= Product::with('image')->paginate(12);
-       return $ProductAll;
-
+        return Cont::all();
     }
 
     /**
@@ -29,7 +27,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -40,9 +38,9 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
-        $ProductOne = Product::with('image')->find($id);
-        return $ProductOne;
+        $cont = Cont::findOrFail($id);
+        if($cont) return $cont;
+        else 'not found';
     }
 
     /**
@@ -54,7 +52,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -65,6 +63,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

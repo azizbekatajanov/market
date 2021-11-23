@@ -885,6 +885,21 @@
         },
         {
             "name": "laravel/framework",
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "version": "v8.73.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "f60e5ceccac453864edbf001b665450886cda8fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/f60e5ceccac453864edbf001b665450886cda8fc",
+                "reference": "f60e5ceccac453864edbf001b665450886cda8fc",
+=======
+=======
+>>>>>>> 0b565508b4533df040cbddddef256bfa6616f6b5
             "version": "v8.71.0",
             "source": {
                 "type": "git",
@@ -895,6 +910,10 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/d822426d75ecf8e8ccd3ccd404db7202d1a9875e",
                 "reference": "d822426d75ecf8e8ccd3ccd404db7202d1a9875e",
+<<<<<<< HEAD
+>>>>>>> be3286fbf1759c6f7fb47a8024f22b31b5275355
+=======
+>>>>>>> 0b565508b4533df040cbddddef256bfa6616f6b5
                 "shasum": ""
             },
             "require": {
@@ -1053,7 +1072,15 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
+<<<<<<< HEAD
+<<<<<<< HEAD
+            "time": "2021-11-19T14:10:17+00:00"
+=======
             "time": "2021-11-16T15:00:50+00:00"
+>>>>>>> be3286fbf1759c6f7fb47a8024f22b31b5275355
+=======
+            "time": "2021-11-16T15:00:50+00:00"
+>>>>>>> 0b565508b4533df040cbddddef256bfa6616f6b5
         },
         {
             "name": "laravel/sanctum",
@@ -6199,16 +6226,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.8",
+            "version": "9.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e"
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
-                "reference": "cf04e88a2e3c56fc1a65488afd493325b4c1bc3e",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
+                "reference": "f301eb1453c9e7a1bc912ee8b0ea9db22c60223b",
                 "shasum": ""
             },
             "require": {
@@ -6264,7 +6291,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.8"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.9"
             },
             "funding": [
                 {
@@ -6272,7 +6299,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-10-30T08:01:38+00:00"
+            "time": "2021-11-19T15:21:02+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",

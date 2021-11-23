@@ -16,8 +16,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category_all=Category::with('product')->paginate(12);
-        return $category_all;
+        $categories =Category::with('product')->paginate(12);
+        return $categories;
     }
 
     /**

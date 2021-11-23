@@ -265,9 +265,6 @@
         </div>
     </div>
 
-    <h1 style="color: red; font-size: 150px">
-        @{{ categories }}
-    </h1>
     <!-- Ad -->
 
     <div class="avds_xl">

@@ -28,6 +28,7 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="{{asset('/css/material-dashboard.css')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('/css/demo.css')}}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 </head>
 
 <body class="">

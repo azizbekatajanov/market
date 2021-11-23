@@ -38,11 +38,11 @@ The above copyright notice and this permission notice shall be included in all c
 
           Tip 2: you can also add an image using data-image tag
       -->
-        <div class="logo"><a href="http://www.creative-tim.com" class="simple-text logo-mini">
+        <div class="logo"><a href="{{route('dashboard.index')}}" class="simple-text logo-mini">
                 CT
             </a>
-            <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-                Creative Tim
+            <a href="{{route('dashboard.index')}}" class="simple-text logo-normal">
+                Market
             </a></div>
         <div class="sidebar-wrapper">
             <div class="user">
@@ -88,7 +88,7 @@ The above copyright notice and this permission notice shall be included in all c
                     </a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#pagesExamples">
+                    <a class="nav-link" href="{{route('categories.index')}}">
                         <i class="material-icons">category</i>
                         <p> Категории</p>
                     </a>

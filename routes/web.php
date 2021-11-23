@@ -24,4 +24,7 @@ Route::prefix('dashboard')->group(function (){
     Route::get('/', function (){
         return view('dashboard.index');
     });
+    Route::get('/categories', function (){
+       return view('dashboard.categories.index');
+    })->name('categories.index');
 });

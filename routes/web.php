@@ -21,10 +21,6 @@ Route::get('/contact',[\App\Http\Controllers\HomeController::class,'contact']);
 Route::get('/categories',[\App\Http\Controllers\HomeController::class,'categories']);
 
 Route::prefix('dashboard')->group(function (){
-    Route::get('/', function (){
-        return view('dashboard.index');
-    });
-    Route::get('/categories', function (){
-       return view('dashboard.categories.index');
-    })->name('categories.index');
+    Route::view('/', 'dashboard.index')->name('dashboard.index');
+    Route::view('/categories', 'dashboard.categories.index')->name('categories.index');
 });

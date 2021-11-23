@@ -23,6 +23,8 @@ Route::get('/categories',[\App\Http\Controllers\HomeController::class,'categorie
 Route::prefix('dashboard')->group(function (){
     Route::get('/', function (){
         return view('dashboard.index');
-    });
-
+    })->name('dashboard.index');
+    Route::get('/categories', function (){
+        return view('dashboard.categories.index');
+    })->name('categories.index');
 });

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sublime project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-<<<<<<< HEAD
+
     <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
     <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
@@ -16,9 +16,7 @@
     <link rel="stylesheet" type="text/css" href="styles/responsive.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-=======
 
->>>>>>> 5f4c2e4f12f04f1230343fe7d3a02296b2bfcc5f
     <link rel="stylesheet" type="text/css" href="{{asset('styles/bootstrap4/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -27,11 +25,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('styles/main_styles.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('styles/responsive.css')}}">
     <script src=" {{asset('https://cdn.jsdelivr.net/npm/vue@2.6.14')}}"></script>
-<<<<<<< HEAD
->>>>>>> 8ff712483e94550e234259a93be35f242e4a5042
-=======
-
->>>>>>> 5f4c2e4f12f04f1230343fe7d3a02296b2bfcc5f
     @yield('head')
 </head>
 <header class="header">
@@ -191,10 +184,10 @@
                 this.categories = categories.data;
             }
         },
-        // async created() {
-        //     await this.getCategories();
-        //     await console.log('categories from component', this.categories)
-        // }
+        async created() {
+            await this.getCategories();
+            // await console.log('categories from component', this.categories)
+        }
     })
 </script>
 

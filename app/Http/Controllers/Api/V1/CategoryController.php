@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
 {
@@ -15,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $category_all=Category::all();
+        $category_all=Category::with('product')->paginate(12);
         return $category_all;
     }
 
@@ -27,7 +28,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -38,7 +39,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $category = Category::findOrFail($id);
+        return $category;
+
     }
 
     /**
@@ -50,7 +54,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -61,6 +65,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+
     }
 }

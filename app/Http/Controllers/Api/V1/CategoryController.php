@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
 
 class CategoryController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -28,7 +29,6 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -39,10 +39,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-
         $category = Category::findOrFail($id);
         return $category;
-
     }
 
     /**

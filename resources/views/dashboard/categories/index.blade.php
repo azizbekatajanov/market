@@ -13,8 +13,8 @@
             </thead>
             <tfoot>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th class="col-1">ID</th>
+                <th class="col-6">Name</th>
                 <th>Date</th>
                 <th class="disabled-sorting text-right">Actions</th>
             </tr>
@@ -23,7 +23,7 @@
                 <tr v-for="category in categories" >
                     <td>@{{ category.id }}</td>
                     <td>@{{ category.name }}</td>
-{{--                <td>@{{ category.date }}</td>--}}
+                    <td>@{{ category.created_at }}</td>
                     <td class="text-right">
                         <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorite</i></a>
                         <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>

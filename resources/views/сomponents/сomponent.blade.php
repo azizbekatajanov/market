@@ -6,6 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Sublime project">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+    <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <link rel="stylesheet" type="text/css" href="{{asset('styles/bootstrap4/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/font-awesome-4.7.0/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('plugins/OwlCarousel2-2.2.1/owl.carousel.css')}}">
@@ -35,14 +46,11 @@
                                         <li><a href="contact.html">Contact</a></li>
                                     </ul>
                                 </li>
-                                <li class="hassubs">
+                                {{--  axios for categories --}}
+                                <li class="hassubs" id="app">
                                     <a href="categories.html">Categories</a>
                                     <ul>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
-                                        <li><a href="categories.html">Category</a></li>
+                                        <li v-for="category in categories" ><a href="/@{{ category.id }}">@{{ category.name }}</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Accessories</a></li>
@@ -149,7 +157,6 @@
         </div>
     </div>
 </footer>
-</div>
 <script src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
 <script src="{{asset('styles/bootstrap4/popper.js')}}"></script>
 <script src="{{asset('styles/bootstrap4/bootstrap.min.js')}}"></script>
@@ -163,6 +170,26 @@
 <script src="{{asset('plugins/easing/easing.js')}}"></script>
 <script src="{{asset('plugins/parallax-js-master/parallax.min.js')}}"></script>
 <script src="{{asset('js/custom.js')}}"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            text: '',
+            categories: []
+        },
+        methods: {
+            async getCategories(){
+                const { data: categories } = await axios.get('/api/category');
+                this.categories = categories.data;
+            }
+        },
+        async created() {
+            await this.getCategories();
+            // await console.log('categories from component', this.categories)
+        }
+    })
+</script>
 
 @yield('script')
 </body>

@@ -17,12 +17,15 @@ class HomeController extends Controller
     }
 
 
-    public function contact(){
-        return view('contactes.contact');
+    public function checkout(){
+        return view('checkout.checkout');
     }
 
 
-    public function categories(){
-        return view('categories.categori');
+    public function store(){
+        return view('store.store');
+    }
+    public function blank(){
+        return view('blank.blank');
     }
 }

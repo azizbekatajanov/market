@@ -505,8 +505,6 @@
         </div>
         <!-- /container -->
     </div>
-    <!-- /SECTION -->
-
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
@@ -835,15 +833,10 @@
         </div>
         <!-- /container -->
     </div>
-    <!-- /NEWSLETTER -->
-
-
-
 
 @endsection
 
 @section('script')
-
 
     <script>
         const db  = axios.get('https://jsonplaceholder.typicode.com/todos/1')
@@ -877,6 +870,5 @@
         }
         getDb()
     </script>
-
 
 @endsection

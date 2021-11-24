@@ -1,10 +1,10 @@
 @extends('layouts.dashboard')
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+
 @section('content')
 
-    <h1 id="get">
+    <div id="get">
         @{{ text }}
-    </h1>
+    </div>
 
     <script>
         // console.log('hello')
@@ -15,9 +15,6 @@
             },
             async created(){
                 console.log('rendered page')
-                const items = await fetch('/api/category')
-                    .then(res => res.json())
-                    .then(data => console.log(data))
             }
         })
     </script>

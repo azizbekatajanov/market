@@ -20,15 +20,12 @@ Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product
 Route::get('/contact',[\App\Http\Controllers\HomeController::class,'contact']);
 Route::get('/categories',[\App\Http\Controllers\HomeController::class,'categories']);
 
-Route::prefix('dashboard')->group(function (){
-    Route::get('/', function (){
-        return view('dashboard.index');
-    })->name('dashboard.index');
-    Route::get('/categories', function (){
-        return view('dashboard.categories.index');
-    })->name('categories.index');
-});
 Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout']);
 Route::get('/store',[\App\Http\Controllers\HomeController::class,'store']);
 Route::get('/blank',[\App\Http\Controllers\HomeController::class,'blank']);
 
+
+Route::prefix('dashboard')->group(function (){
+    Route::view('/', 'dashboard.index')->name('dashboard.index');
+    Route::view('/categories', 'dashboard.categories.index')->name('categories.index');
+});

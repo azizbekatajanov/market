@@ -24,7 +24,8 @@ Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout'])
 Route::get('/store',[\App\Http\Controllers\HomeController::class,'store']);
 Route::get('/blank',[\App\Http\Controllers\HomeController::class,'blank']);
 
-Route::prefix('dashboard')->group(function (){
+
+Route::prefix('dashboard')->group(function () {
     Route::view('/', 'dashboard.index')->name('dashboard.index');
     Route::view('/categories', 'dashboard.categories.index')->name('categories.index');
 });

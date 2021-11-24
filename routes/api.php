@@ -26,6 +26,7 @@ Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
+    'store' => App\Http\Controllers\Api\V1\FilterController::class,
 ]);
 Route::apiResources([
     'cont' => \App\Http\Controllers\Api\V1\ContactController::class,

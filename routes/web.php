@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/s/{id}',[\App\Http\Controllers\SessionController::class,'test']);
 Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
 Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product']);
 Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout']);

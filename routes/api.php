@@ -26,6 +26,7 @@ Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
+    'session'=>\App\Http\Controllers\Api\V1\SessionController::class,
 ]);
 Route::apiResources([
     'cont' => \App\Http\Controllers\Api\V1\ContactController::class,

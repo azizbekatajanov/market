@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Http\Resources\CategoryResource;
 
-class CategoryController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories =Category::with('product')->paginate(12);
-        return $categories;
+
     }
 
     /**
@@ -28,6 +25,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        //
     }
 
     /**
@@ -38,8 +36,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        $category = Category::findOrFail($id);
-        return $category;
+        //
     }
 
     /**
@@ -51,7 +48,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
     }
 
     /**
@@ -62,6 +59,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
 }

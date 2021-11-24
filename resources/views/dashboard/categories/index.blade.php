@@ -44,7 +44,7 @@
             },
             methods: {
                 async getCategories(){
-                    const { data: categories } = await axios.get('/api/dashboard/category');
+                    const { data: categories } = await axios.get('/api/dashboard/categories');
                     this.categories = categories.data;
                 }
             },

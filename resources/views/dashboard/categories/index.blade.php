@@ -1,7 +1,14 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container-fluid" id="app3">
+        <div class="popup">
+            <form class="form" @submit.prevent="sendCategoryHandler">
+                @csrf
+                <input type="text" name="name" placeholder="Введите название категорию" style="width: 300px; height: 40px;" v-model="inputVal"/>
+                <button class="btn btn-success">Добавить категорию</button>
+            </form>
+        </div>
         <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
             <thead>
             <tr>
@@ -19,7 +26,7 @@
                 <th class="disabled-sorting text-right">Actions</th>
             </tr>
             </tfoot>
-            <tbody id="app3">
+            <tbody >
                 <tr v-for="category in categories" >
                     <td>@{{ category.id }}</td>
                     <td>@{{ category.name }}</td>
@@ -34,18 +41,30 @@
         </table>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <script>
         new Vue({
             el: '#app3',
             data: {
-                categories: []
+                categories: [],
+                inputVal: ''
             },
             methods: {
                 async getCategories(){
                     const { data: categories } = await axios.get('/api/dashboard/categories');
                     this.categories = categories.data;
+                },
+                async sendCategoryHandler(){
+                    console.log(this.inputVal)
+                    try {
+                        const res = await axios.post('/api/dashboard/category', {
+                            name: null,
+                        })
+                        console.log(res);
+
+                    } catch (e) {
+                        console.log(e.response.data.message);
+                    }
                 }
             },
             async created() {

@@ -30,6 +30,9 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     @yield('head')
 </head>
 
@@ -136,7 +139,6 @@
                                 <div class="cart-btns">
                                     <a href="#">View Cart</a>
                                     <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
->>>>>>> 4c6f28ae73ac68aee7294c72ba51728fa01a9895
                                 </div>
                             </div>
                         </div>
@@ -264,6 +266,7 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
+
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/slick.min.js')}}"></script>

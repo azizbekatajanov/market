@@ -24,6 +24,7 @@
             </div>
             <!-- /responsive-nav -->
         </div>
+
         <!-- /container -->
     </nav>
     <!-- /NAVIGATION -->
@@ -833,12 +834,9 @@
         <!-- /container -->
     </div>
 
-
-
 @endsection
 
 @section('script')
-
 
     <script>
         const db  = axios.get('https://jsonplaceholder.typicode.com/todos/1')
@@ -872,7 +870,5 @@
         }
         getDb()
     </script>
-
-
 
 @endsection

@@ -1,9 +1,11 @@
 @extends('layouts.dashboard')
 
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div class="container-fluid" id="app3">
         <div class="popup">
-            <form class="form" @submit.prevent="sendCategoryHandler">
+            <form class="form" @submit="sendCategoryHandler">
                 @csrf
                 <input type="text" name="name" placeholder="Введите название категорию" style="width: 300px; height: 40px;" v-model="inputVal"/>
                 <button class="btn btn-success">Добавить категорию</button>
@@ -55,10 +57,9 @@
                     this.categories = categories.data;
                 },
                 async sendCategoryHandler(){
-                    console.log(this.inputVal)
                     try {
-                        const res = await axios.post('/api/dashboard/category', {
-                            name: null,
+                        const res = await axios.post('/api/dashboard/categories', {
+                            name: this.inputVal
                         })
                         console.log(res);
 

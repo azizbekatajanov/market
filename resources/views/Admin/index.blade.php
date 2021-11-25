@@ -1,6 +1,7 @@
 @extends('.Admin.component.component')
 @section('head')
-
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 @endsection
 
 @section('body')

@@ -3,6 +3,7 @@
 
 @endsection
 @section('body')
+<<<<<<< HEAD
 
 
 
@@ -21,6 +22,40 @@
                     <li><a href="#">Smartphones</a></li>
                     <li><a href="#">Cameras</a></li>
                     <li><a href="#">Accessories</a></li>
+=======
+    <div class="menu menu_mm trans_300" >
+        <div class="menu_container menu_mm">
+            <div class="page_menu_content">
+
+                <div class="page_menu_search menu_mm">
+                    <form action="#">
+                        <input type="search" required="required" class="page_menu_search_input menu_mm" placeholder="Search for products...">
+                    </form>
+                </div>
+                <ul class="page_menu_nav menu_mm">
+                    <li class="page_menu_item has-children menu_mm">
+                        <a href="index.html">Home<i class="fa fa-angle-down"></i></a>
+                        <ul class="page_menu_selection menu_mm">
+                            <li class="page_menu_item menu_mm"><a href="categories.html">Categories<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="product.html">Product<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="cart.html">Cart<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="checkout.html">Checkout<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
+                        </ul>
+                    </li>
+                    <li class="page_menu_item has-children menu_mm">
+                        <a href="categories.html">Categories<i class="fa fa-angle-down"></i></a>
+                        <ul class="page_menu_selection menu_mm">
+                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                            <li class="page_menu_item menu_mm"><a href="categories.html">Category<i class="fa fa-angle-down"></i></a></li>
+                        </ul>
+                    </li>
+                    <li class="page_menu_item menu_mm"><a href="index.html">Accessories<i class="fa fa-angle-down"></i></a></li>
+                    <li class="page_menu_item menu_mm"><a href="#">Offers<i class="fa fa-angle-down"></i></a></li>
+                    <li class="page_menu_item menu_mm"><a href="contact.html">Contact<i class="fa fa-angle-down"></i></a></li>
+>>>>>>> 35f38750bfa1e974f1b6257bfa3855c63c682ef3
                 </ul>
                 <!-- /NAV -->
             </div>
@@ -30,6 +65,7 @@
     </nav>
     <!-- /NAVIGATION -->
 
+<<<<<<< HEAD
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
@@ -45,6 +81,41 @@
                         <div class="shop-body">
                             <h3>Laptop<br>Collection</h3>
                             <a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
+=======
+        <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+
+        <div class="menu_social">
+            <ul>
+                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Home -->
+    <div class="home">
+        <div class="home_slider_container">
+
+            <!-- Home Slider -->
+            <div class="owl-carousel owl-theme home_slider">
+
+                <!-- Slider Item -->
+                <div class="owl-item home_slider_item">
+                    <div class="home_slider_background" style="background-image:url(images/home_slider_1.jpg)"></div>
+                    <div class="home_slider_content_container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="home_slider_content"  data-animation-in="fadeIn" data-animation-out="animate-out fadeOut">
+                                        <div class="home_slider_title">A new Online Shop experience.</div>
+                                        <div class="home_slider_subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</div>
+                                        <div class="button button_light home_button"><a href="#">Shop Now</a></div>
+                                    </div>
+                                </div>
+                            </div>
+>>>>>>> 35f38750bfa1e974f1b6257bfa3855c63c682ef3
                         </div>
                     </div>
                 </div>
@@ -508,9 +579,18 @@
     </div>
     <!-- /SECTION -->
 
+<<<<<<< HEAD
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
+=======
+    <!-- Products -->
+    <h1 style="color: red; font-size: 100px; text-align: center;">
+
+    </h1>
+
+    <div class="products">
+>>>>>>> 35f38750bfa1e974f1b6257bfa3855c63c682ef3
         <div class="container">
             <!-- row -->
             <div class="row">
@@ -671,6 +751,7 @@
                             </div>
                             <!-- /product widget -->
 
+<<<<<<< HEAD
                             <!-- product widget -->
                             <div class="product-widget">
                                 <div class="product-img">
@@ -683,6 +764,12 @@
                                 </div>
                             </div>
                             <!-- /product widget -->
+=======
+    <h1 style="color: red; font-size: 150px">
+        @{{ categories }}
+    </h1>
+    <!-- Ad -->
+>>>>>>> 35f38750bfa1e974f1b6257bfa3855c63c682ef3
 
                             <!-- product widget -->
                             <div class="product-widget">
@@ -836,7 +923,10 @@
         </div>
         <!-- /container -->
     </div>
+<<<<<<< HEAD
     <!-- /NEWSLETTER -->
+=======
+>>>>>>> 35f38750bfa1e974f1b6257bfa3855c63c682ef3
 
 
 
@@ -845,6 +935,7 @@
 
 @section('script')
 
+<<<<<<< HEAD
 
     <script>
         const db  = axios.get('https://jsonplaceholder.typicode.com/todos/1')
@@ -878,6 +969,10 @@
         }
         getDb()
     </script>
+=======
+    <script>
+>>>>>>> 35f38750bfa1e974f1b6257bfa3855c63c682ef3
 
+    </script>
 
 @endsection

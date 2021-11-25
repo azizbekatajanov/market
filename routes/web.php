@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/s/{id}',[\App\Http\Controllers\SessionController::class,'test']);
 Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
 
+Route::view('/login', 'user.login')->name('user.login');
+Route::view('/register', 'user.register')->name('user.register');
+
 Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product']);
 Route::get('/contact',[\App\Http\Controllers\HomeController::class,'contact']);
 Route::get('/categories',[\App\Http\Controllers\HomeController::class,'categories']);

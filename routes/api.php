@@ -13,21 +13,23 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+//
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+Route::apiResources([
+    'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
+    'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
+    'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
+    'cart'=>\App\Http\Controllers\Api\V1\CartController::class
+]);
+Route::apiResources([
+    'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
+]);
 Route::prefix('dashboard')->group(function (){
     Route::apiResources([
         'category'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
     ]);
 });
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::apiResources([
-    'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
-    'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
-    'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
-    'session'=>\App\Http\Controllers\Api\V1\SessionController::class,
-]);
-Route::apiResources([
-    'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
-]);
+
+

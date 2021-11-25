@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CartRequest;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
-session_start();
-class SessionController extends Controller
+
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +17,12 @@ class SessionController extends Controller
      */
     public function index()
     {
-        return $_SESSION['name'];
+        $cart=User::findOrFail(1)->cart;
+
+        dd($cart);
+
+
+
     }
 
     /**
@@ -23,9 +31,13 @@ class SessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CartRequest $request)
     {
-
+         $cart=new Cart();
+         $cart->user_id=1;
+         $cart->product_id=$request->product_id;
+         $cart->amount=$request->amount;
+         $cart->save();
     }
 
     /**

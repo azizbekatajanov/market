@@ -19,6 +19,9 @@ Route::prefix('dashboard')->group(function (){
         'category'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
     ]);
 });
+// Route For Filter Controller
+Route::get('/store', [\App\Http\Controllers\Api\v1\FilterController::class, 'filter']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -26,7 +29,7 @@ Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
-    'store' => App\Http\Controllers\Api\V1\FilterController::class,
+//    'store' => App\Http\Controllers\Api\V1\FilterController::class,
 ]);
 Route::apiResources([
     'cont' => \App\Http\Controllers\Api\V1\ContactController::class,

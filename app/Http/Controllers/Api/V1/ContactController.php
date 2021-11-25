@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\api\v1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactRequest;
 use App\Models\Cont;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
@@ -25,9 +25,15 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
-
+        $cont = new Cont();
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
     }
 
     /**
@@ -50,9 +56,15 @@ class ContactController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ContactRequest $request, $id)
     {
-
+        $cont = Cont::findOrFail($id);
+        $cont->first_name = $request->first_name;
+        $cont->last_name = $request->last_name;
+        $cont->subject = $request->subject;
+        $cont->message = $request->message;
+        $cont->save();
+        return $cont;
     }
 
     /**
@@ -63,6 +75,7 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-
+        Cont::findOrFail($id)->delete();
+        return "Deleted";
     }
 }

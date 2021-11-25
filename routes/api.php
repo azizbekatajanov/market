@@ -14,17 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::prefix('dashboard')->group(function (){
-    Route::apiResources([
-        'category'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
-    ]);
-});
 // Route For Filter Controller
 Route::get('/store', [\App\Http\Controllers\Api\v1\FilterController::class, 'filter']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
 Route::apiResources([
     'category' => \App\Http\Controllers\Api\V1\CategoryController::class,
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
@@ -34,3 +30,11 @@ Route::apiResources([
 Route::apiResources([
     'cont' => \App\Http\Controllers\Api\V1\ContactController::class,
 ]);
+Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
+Route::post('login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login']);
+Route::post('/me', [\App\Http\Controllers\Api\V1\AuthController::class, 'me'])->middleware('auth:sanctum');
+Route::prefix('dashboard')->group(function (){
+    Route::apiResources([
+        'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
+    ]);
+});

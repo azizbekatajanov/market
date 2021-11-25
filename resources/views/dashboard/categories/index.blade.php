@@ -50,7 +50,7 @@
                 <button class="btn btn-success">Добавить категорию</button>
             </form>
         </div>
-        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+        <table v-if="categories.length > 0" id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
             <thead>
             <tr>
                 <th>ID</th>
@@ -67,13 +67,14 @@
                 <th class="disabled-sorting text-right">Actions</th>
             </tr>
             </tfoot>
-            <tbody >
+            <tbody>
                 <tr v-for="category in categories" >
                     <td>@{{ category.id }}</td>
-                    <td>@{{ category.name }}</td>
+                    <td>
+                        @{{ category.name }}
+                    </td>
                     <td>@{{ category.created_at }}</td>
                     <td class="text-right">
-                        <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorite</i></a>
                         <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
                         <a href="#" class="btn btn-link btn-danger btn-just-icon remove" @click="visibleHandler(category.id)" >
                             <i class="material-icons">close</i>
@@ -82,6 +83,7 @@
                 </tr>
             </tbody>
         </table>
+        <h2 v-else class="text-center text-danger">У вас пока нет категории</h2>
     </div>
 
 
@@ -105,7 +107,7 @@
                 },
                 async removeCategoryHandler(){
                     await axios.delete(`/api/dashboard/category/${this.categoryId}`)
-                    this.isVisible = false
+                    // this.isVisible = false
                     window.location.reload()
                 },
                 async sendCategoryHandler(){
@@ -113,7 +115,6 @@
                         const res = await axios.post('/api/dashboard/category', {
                             name: this.inputVal,
                         })
-                        console.log(res);
 
                     } catch (e) {
                         console.log(e.response.data.message);

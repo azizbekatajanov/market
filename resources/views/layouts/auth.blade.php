@@ -69,11 +69,15 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="{{asset('/js/popper.min.js')}}"></script>
   <script src="{{asset('/js/bootstrap-material-design.min.js')}}"></script>
   <script src="{{asset('/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
+
   <script src="{{asset('/js/plugins/jquery.bootstrap-wizard.js')}}"></script>
   <!--	Plugin for Select, full documentation here: http://silviomoreto.github.io/bootstrap-select -->
   <script src="{{asset('/js/plugins/bootstrap-selectpicker.js')}}"></script>
   <!-- Plugin for Fileupload, full documentation here: http://www.jasny.net/bootstrap/javascript/#fileinput -->
   <script src="{{asset('/js/plugins/jasny-bootstrap.min.js')}}"></script>
+  <!-- Library for adding dinamically elements -->
+  <script src="{{asset('/js/plugins/arrive.min.js')}}"></script>
+
   <!-- Chartist JS -->
   <script src="{{asset('/js/plugins/chartist.min.js')}}"></script>
   <!--  Notifications Plugin    -->

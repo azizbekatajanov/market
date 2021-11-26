@@ -14,12 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route For Filter Controller
+Route::get('/store', [\App\Http\Controllers\Api\v1\FilterController::class, 'filter']);
+
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
+
 Route::apiResources([
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
+//    'store' => App\Http\Controllers\Api\V1\FilterController::class,
 ]);
 
 Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);

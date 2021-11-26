@@ -3,8 +3,7 @@
 
 @endsection
 @section('body')
-
-    <!-- NAVIGATION -->
+   <!-- NAVIGATION -->
     <nav id="navigation">
         <!-- container -->
         <div class="container">
@@ -837,7 +836,6 @@
 @endsection
 
 @section('script')
-
     <script>
         const db  = axios.get('https://jsonplaceholder.typicode.com/todos/1')
             .then(async res => await console.log(res))
@@ -870,5 +868,4 @@
         }
         getDb()
     </script>
-
 @endsection

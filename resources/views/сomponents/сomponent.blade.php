@@ -61,7 +61,6 @@
         <div class="container">
             <!-- row -->
             <div class="row">
-
                 <!-- LOGO -->
                 <div class="col-md-3">
                     <div class="header-logo">
@@ -273,7 +272,6 @@
 <script src="{{asset('js/nouislider.min.js')}}"></script>
 <script src="{{asset('js/jquery.zoom.min.js')}}"></script>
 <script src="{{asset('js/main.js')}}"></script>
-
 @yield('script')
 </body>
 </html>

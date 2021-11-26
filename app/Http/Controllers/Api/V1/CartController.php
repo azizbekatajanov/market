@@ -17,9 +17,9 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart=User::findOrFail(1)->cart;
 
-        dd($cart);
+        $cart=User::findOrFail(1)->with('cart','image')->get();
+        return $cart;
 
 
 
@@ -48,7 +48,8 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        //
+        $cart=User::findOrFail(1)->cart->where('id',$id);
+       return $cart;
     }
 
     /**
@@ -60,7 +61,16 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user=User::findOrFail(1)->cart->where('id',$id);
+        if($user!="[]"){
+           $cart=Cart::findOrFail($id);
+           $cart->amount=$request->amount;
+           $cart->save();
+           return $cart;
+        }
+        else{
+           return 'error';
+        }
     }
 
     /**
@@ -71,6 +81,12 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user=User::findOrFail(1)->cart->where('id',$id);
+        if($user!="[]"){
+            $cart=Cart::destroy($id);
+        }
+        else{
+            return 'error';
+        }
     }
 }

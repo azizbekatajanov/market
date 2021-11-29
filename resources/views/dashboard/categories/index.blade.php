@@ -2,6 +2,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 @section('content')
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <div class="container-fluid" id="app3">
         <div class="swal2-container swal2-center swal2-fade swal2-shown"   v-show="isVisible">
             <div aria-describedby="swal2-content" class="swal2-popup swal2-modal swal2-show" tabindex="-1" role="dialog" aria-live="assertive" aria-modal="true" style="display: flex;"            >
@@ -50,7 +52,7 @@
                 <button class="btn btn-success">Добавить категорию</button>
             </form>
         </div>
-        <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+        <table v-if="categories.length > 0" id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
             <thead>
             <tr>
                 <th>ID</th>
@@ -67,13 +69,14 @@
                 <th class="disabled-sorting text-right">Actions</th>
             </tr>
             </tfoot>
-            <tbody >
+            <tbody>
                 <tr v-for="category in categories" >
                     <td>@{{ category.id }}</td>
-                    <td>@{{ category.name }}</td>
+                    <td>
+                        @{{ category.name }}
+                    </td>
                     <td>@{{ category.created_at }}</td>
                     <td class="text-right">
-                        <a href="#" class="btn btn-link btn-info btn-just-icon like"><i class="material-icons">favorite</i></a>
                         <a href="#" class="btn btn-link btn-warning btn-just-icon edit"><i class="material-icons">dvr</i></a>
                         <a href="#" class="btn btn-link btn-danger btn-just-icon remove" @click="visibleHandler(category.id)" >
                             <i class="material-icons">close</i>
@@ -82,6 +85,7 @@
                 </tr>
             </tbody>
         </table>
+        <h2 v-else class="text-center text-danger">У вас пока нет категории</h2>
     </div>
 
 
@@ -96,7 +100,7 @@
             },
             methods: {
                 async getCategories(){
-                    const { data: categories } = await axios.get('/api/dashboard/category');
+                    const { data: categories } = await axios.get('/api/dashboard/categories');
                     this.categories = categories.data;
                 },
                 visibleHandler(id){
@@ -104,16 +108,15 @@
                     this.categoryId = id
                 },
                 async removeCategoryHandler(){
-                    await axios.delete(`/api/dashboard/category/${this.categoryId}`)
-                    this.isVisible = false
+                    await axios.delete(`/api/dashboard/categories/${this.categoryId}`)
+                    // this.isVisible = false
                     window.location.reload()
                 },
                 async sendCategoryHandler(){
                     try {
-                        const res = await axios.post('/api/dashboard/category', {
+                        const res = await axios.post('/api/dashboard/categories', {
                             name: this.inputVal,
                         })
-                        console.log(res);
 
                     } catch (e) {
                         console.log(e.response.data.message);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Dashboard;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -17,7 +18,7 @@ class CategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'created_at' => $this->created_at,
+            'created_at' => $this->created_at->format('d-m-Y'),
         ];
     }
 }

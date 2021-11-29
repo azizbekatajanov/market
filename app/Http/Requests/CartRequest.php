@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CategoryRequest extends FormRequest
+class CartRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255|unique:categories,name'.($this->id !== null ? ','.$this->id :''),
+            'product_id'=>'required|integer',
+            'amount'=>'required|integer',
         ];
     }
 }

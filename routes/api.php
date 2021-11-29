@@ -35,3 +35,10 @@ Route::prefix('dashboard')->group(function (){
         'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class
     ]);
 });
+
+
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/fk', static function() {
+        return ['message' => 'ok'];
+    })->middleware(['roles:aziz|manager']);
+});

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CartRequest;
 use App\Models\Cart;
+use App\Models\OrdersUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class OrdesUserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,8 @@ class CartController extends Controller
      */
     public function index()
     {
-
-        $cart=User::findOrFail(1)->with('cart','cart.product.image')->get();
+        $cart=OrdersUsers::all();
         return $cart;
-
-
-
     }
 
     /**
@@ -31,13 +27,22 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CartRequest $request)
+    public function store(Request $request)
     {
-         $cart=new Cart();
-         $cart->user_id=1;
-         $cart->product_id=$request->product_id;
-         $cart->amount=$request->amount;
-         $cart->save();
+//        $OrdersUsers=new OrdersUsers();
+//        $OrdersUsers->user_id=1;
+//        $OrdersUsers->first_name=$request->first_name;
+//        $OrdersUsers->last_name=$request->last_name;
+//        $OrdersUsers->email=$request->email;
+//        $OrdersUsers->address=$request->address;
+//        $OrdersUsers->city=$request->city;
+//        $OrdersUsers->country=$request->country;
+//        $OrdersUsers->zip_code=$request->zip_code;
+//        $OrdersUsers->tel=$request->tel;
+//        $OrdersUsers->save();
+        $search=OrdersUsers::all()->where('user_id' ,'==',1)->sortByDesc('id')->first();
+        $usercart=User::findOrFail(1)->cart;
+        return $usercart;
     }
 
     /**
@@ -48,8 +53,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $cart=User::findOrFail(auth()->id())->cart->where('id',$id);
-       return $cart;
+        //
     }
 
     /**
@@ -61,16 +65,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::findOrFail(1)->cart->where('id',$id);
-        if($user!="[]"){
-           $cart=Cart::findOrFail($id);
-           $cart->amount=$request->amount;
-           $cart->save();
-           return $cart;
-        }
-        else{
-           return 'error';
-        }
+        //
     }
 
     /**
@@ -81,12 +76,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail(1)->cart->where('id',$id);
-        if($user!="[]"){
-            $cart=Cart::destroy($id);
-        }
-        else{
-            return 'error';
-        }
+        //
     }
 }

@@ -19,6 +19,7 @@ Route::apiResources([
     'store' => App\Http\Controllers\Api\V1\FilterController::class,
     'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
+    'ordes_user'=>\App\Http\Controllers\Api\V1\OrdesUserController::class,
 ]);
 
 Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
@@ -34,11 +35,4 @@ Route::prefix('dashboard')->group(function (){
     Route::resources([
         'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class
     ]);
-});
-
-
-Route::middleware('auth:sanctum')->group(function() {
-    Route::get('/fk', static function() {
-        return ['message' => 'ok'];
-    })->middleware(['roles:aziz|manager']);
 });

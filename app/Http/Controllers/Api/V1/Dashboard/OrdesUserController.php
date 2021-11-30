@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrdersUsers;
+use App\Models\OrdersUsersList;
 use Illuminate\Http\Request;
 
 class OrdesUserController extends Controller
@@ -14,7 +16,8 @@ class OrdesUserController extends Controller
      */
     public function index()
     {
-        //
+        $cart=OrdersUsers::all();
+        return $cart;
     }
 
     /**
@@ -36,7 +39,7 @@ class OrdesUserController extends Controller
      */
     public function show($id)
     {
-        //
+        $search=OrdersUsersList::where('orders_users_id',$id)->get();
     }
 
     /**
@@ -48,7 +51,17 @@ class OrdesUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $OrdersUsers=OrdersUsers::findOrFail($id);
+        $OrdersUsers->user_id=auth()->id();
+        $OrdersUsers->first_name=$request->first_name;
+        $OrdersUsers->last_name=$request->last_name;
+        $OrdersUsers->email=$request->email;
+        $OrdersUsers->address=$request->address;
+        $OrdersUsers->city=$request->city;
+        $OrdersUsers->country=$request->country;
+        $OrdersUsers->zip_code=$request->zip_code;
+        $OrdersUsers->tel=$request->tel;
+        $OrdersUsers->save();
     }
 
     /**
@@ -59,6 +72,6 @@ class OrdesUserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroi=OrdersUsers::destroy($id);
     }
 }

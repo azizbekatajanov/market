@@ -19,7 +19,7 @@ class OrdesUserController extends Controller
      */
     public function index()
     {
-        $cart=OrdersUsers::where('user_id' ,'=',1)->get();;
+        $cart=OrdersUsers::where('user_id' ,'=',auth()->id())->get();;
         return $cart;
     }
 
@@ -31,18 +31,18 @@ class OrdesUserController extends Controller
      */
     public function store(Request $request)
     {
-//        $OrdersUsers=new OrdersUsers();
-//        $OrdersUsers->user_id=1;
-//        $OrdersUsers->first_name=$request->first_name;
-//        $OrdersUsers->last_name=$request->last_name;
-//        $OrdersUsers->email=$request->email;
-//        $OrdersUsers->address=$request->address;
-//        $OrdersUsers->city=$request->city;
-//        $OrdersUsers->country=$request->country;
-//        $OrdersUsers->zip_code=$request->zip_code;
-//        $OrdersUsers->tel=$request->tel;
-//        $OrdersUsers->save();
-          $search=OrdersUsers::all()->where('user_id' ,'==',1)->sortByDesc('id')->first();
+        $OrdersUsers=new OrdersUsers();
+        $OrdersUsers->user_id=auth()->id();
+        $OrdersUsers->first_name=$request->first_name;
+        $OrdersUsers->last_name=$request->last_name;
+        $OrdersUsers->email=$request->email;
+        $OrdersUsers->address=$request->address;
+        $OrdersUsers->city=$request->city;
+        $OrdersUsers->country=$request->country;
+        $OrdersUsers->zip_code=$request->zip_code;
+        $OrdersUsers->tel=$request->tel;
+        $OrdersUsers->save();
+          $search=OrdersUsers::all()->where('user_id' ,'==',auth()->id())->sortByDesc('id')->first();
           $usercart=Cart::where('user_id' ,'=',$search->user_id)->get();
            $sum=0;
            $price=0;
@@ -75,9 +75,15 @@ class OrdesUserController extends Controller
      */
     public function show($id)
     {
-        $UsersOrdersLists=OrdersUsersList::where('user_id' ,'==',1)->get();
 
-        return $UsersOrdersLists;
+      $search=OrdersUsersList::where('orders_users_id',$id)->get();
+      $search1=$search[0];
+      if(auth()->id()==$search1->id){
+          return $search;
+      }
+      else{
+          abort(404);
+      }
 
     }
 

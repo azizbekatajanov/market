@@ -15,7 +15,7 @@ class CreateOrdersUsersListsTable extends Migration
     {
         Schema::create('orders_users_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('orders_users')->constrained();
+            $table->foreignId('orders_users_id')->constrained();
             $table->foreignId("user_id")->constrained();
             $table->foreignId('product_id');
             $table->decimal('price');

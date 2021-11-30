@@ -13,9 +13,9 @@ class FilterController extends Controller
     // SHOW ALL
     public function show_all(Request $request) {
         if(isset($request->pagination))
-            return DB::table('products')->paginate(50);
+            return DB::table('products')->paginate($request->pagination);
         else
-            return DB::table('products')->paginate(20);
+            return DB::table('products')->paginate(30);
     }
 
     public function filter(Request $request)
@@ -44,7 +44,7 @@ class FilterController extends Controller
                 $q->whereIn('brands.name', explode(',', $request->brand));
             });
         }
-        return $query->get();
+        return $query->paginate(20);
     }
     public function topselling() {
 

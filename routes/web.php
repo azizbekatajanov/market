@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Dashboard\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
 
-Route::view('/login', 'user.login')->name('user.login');
-Route::view('/register', 'user.register')->name('user.register');
+Route::view('/login', 'auth.login')->name('auth.login');
+Route::view('/register', 'auth.register')->name('auth.register');
 
 Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product']);
 Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout']);

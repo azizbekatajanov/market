@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -19,14 +20,18 @@ class AuthController extends Controller
             'last_last'=>$request->last_name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
+//            'avatar'=> Storage::putFile('avatars' , $request->file('avatar'))
 
         ]);
+        $user->avatar = $request->file('avatar')->store('avatars/'.$user->id);
+        $user->save();
         $user->assignRole('user');
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
+
     }
 
     public function login(Request $request)
@@ -39,7 +44,7 @@ class AuthController extends Controller
         $user = User::where('username', $request['username'])->firstOrFail();
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
-            'access-token'=> $token,
+            'access_token'=> $token,
             'token_type' => 'Bearer',
         ]);
     }

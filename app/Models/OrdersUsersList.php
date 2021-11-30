@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class OrdersUsersList extends Model
 {
     use HasFactory;
+
 }

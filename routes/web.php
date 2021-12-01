@@ -18,8 +18,8 @@ Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
 Route::view('/login', 'user.login')->name('user.login');
 Route::view('/register', 'user.register')->name('user.register');
 
-Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product']);
-Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout']);
+Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product'])->middleware('auth');
+Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout'])->middleware('auth');
 Route::get('/store',[\App\Http\Controllers\HomeController::class,'store']);
 Route::get('/blank',[\App\Http\Controllers\HomeController::class,'blank']);
 

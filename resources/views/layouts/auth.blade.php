@@ -89,6 +89,7 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="{{asset('demo/demo.js')}}"></script>
   <script src="{{asset('js/demo/login1.js')}}"></script>
 <script src="{{asset('js/demo/login2.js')}}"></script>
+
 </body>
 
 </html>

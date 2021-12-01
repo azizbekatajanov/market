@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'last_name'=>'nullable|max:255|string',
             'email'=>'required|max:255|email|unique:users,email',
             'password'=>'required|confirmed|min:8',
-            'avatar'=>'nullable|image|mimes:jpg,jpeg,bmp,svg,png|max:5000'
+//            'avatar'=>'nullable|image|mimes:jpg,jpeg,bmp,svg,png|max:5000'
         ];
     }
 }

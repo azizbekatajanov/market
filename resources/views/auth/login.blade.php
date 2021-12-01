@@ -13,7 +13,8 @@
                                 <div class="card-body ">
                                     <form
                                         method="POST"
-                                        @submit.prevent="sendForm"
+{{--                                        action="/api/login"--}}
+                                        @submit="sendForm"
                                     >
                                         @csrf
                                       <span class="bmd-form-group">
@@ -55,7 +56,7 @@
                                         </div>
                                       </span>
                                         <div class="card-footer justify-content-center">
-                                            <button @click.prevent="sendForm" type="submit" class="btn btn-rose btn-link btn-lg">Lets Go</button>
+                                            <button @click="sendForm" class="btn btn-rose btn-link btn-lg">Lets Go</button>
                                         </div>
                                     </form>
                                 </div>
@@ -81,24 +82,31 @@
             data: {
                 name: "",
                 password: "",
-                token: ""
+                token: localStorage.getItem('token'), //get your local storage data
             },
             methods: {
                 async sendForm(){
-                   const {data} = await axios.post('/api/login',{
-                       username: this.name,
-                       password: this.password
-                   })
-                    this.token = data.access_token
-                    localStorage.setItem('token', this.token)
+                   try{
+                       const res = await axios.post('/api/login',{
+                           username: this.name,
+                           password: this.password
+                       })
+                        if(res.data){
+                            this.token = res.data.access_token
+                            window.location.href = '{{ route('homepage') }}'
+                            localStorage.setItem('token', this.token)
+                        }else{
+                            window.location.href = '{{ route('auth.login') }}'
+                        }
+
+                   }catch(e){
+                       console.log(e)
+                   }
                 }
             },
             created(){
                 const token = localStorage.getItem('token')
-                if(token){
-
-                }
-            }
+            },
         })
     </script>
 @endsection

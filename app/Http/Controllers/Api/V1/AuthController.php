@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
     public function register(UserRequest $request)
     {
         $user = User::create([
@@ -47,4 +48,5 @@ class AuthController extends Controller
     {
         return $request->user();
     }
+
 }

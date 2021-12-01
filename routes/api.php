@@ -16,13 +16,21 @@ use Illuminate\Support\Facades\Route;
 Route::apiResources([
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
-    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
+
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
-    'ordes_user'=>\App\Http\Controllers\Api\V1\OrdesUserController::class,
+
 ]);
 
+Route::group(['middleware' => 'auth:sanctum'], function() {
+    Route::apiResources([
+    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
+     'ordes_user'=>\App\Http\Controllers\Api\V1\OrdesUserController::class,
+    ]);
+});
+
+
 Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
-Route::post('login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login']);
+Route::post('/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login']);
 Route::post('/me', [\App\Http\Controllers\Api\V1\AuthController::class, 'me'])->middleware('auth:sanctum');
 
 // Routes For Filter Controller

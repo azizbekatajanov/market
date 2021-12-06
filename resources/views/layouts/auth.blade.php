@@ -28,6 +28,7 @@ The above copyright notice and this permission notice shall be included in all c
     <link href="{{asset('/css/material-dashboard.css')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('/css/demo.css')}}" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
 </head>
 
@@ -47,13 +48,13 @@ The above copyright notice and this permission notice shall be included in all c
       <div class="collapse navbar-collapse justify-content-end">
         <ul class="navbar-nav">
             <li class="nav-item  active ">
-                <a href="{{route('user.login')}}" class="nav-link">
+                <a href="{{route('auth.login')}}" class="nav-link">
                     <i class="material-icons">fingerprint</i>
                     Login
                 </a>
             </li>
             <li class="nav-item ">
-            <a href="{{route('user.register')}}" class="nav-link">
+            <a href="{{route('auth.register')}}" class="nav-link">
               <i class="material-icons">person_add</i>
               Register
             </a>
@@ -88,6 +89,7 @@ The above copyright notice and this permission notice shall be included in all c
   <script src="{{asset('demo/demo.js')}}"></script>
   <script src="{{asset('js/demo/login1.js')}}"></script>
 <script src="{{asset('js/demo/login2.js')}}"></script>
+
 </body>
 
 </html>

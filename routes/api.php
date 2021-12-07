@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::apiResources([
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
-
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
 
 ]);

@@ -24,9 +24,9 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255',
-            'price'=>'required|numeric|between:0,99',
-            'old_price'=>'numeric|between:0,99',
+            'name'=>'required|max:255|unique:products,name',
+            'price'=>'required|numeric',
+            'old_price'=>'numeric',
             'availability'=>'required|boolean',
             'count'=>'required|integer',
             'category_id'=>'required|integer',

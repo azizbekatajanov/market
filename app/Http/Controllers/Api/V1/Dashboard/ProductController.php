@@ -39,6 +39,10 @@ class ProductController extends Controller
             'count'=>$request->count,
             'category_id'=>$request->category_id
         ]);
+
+        if ($request->hasFile('image')){
+
+        }
     }
 
     /**

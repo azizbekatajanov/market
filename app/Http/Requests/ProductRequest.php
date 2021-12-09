@@ -27,7 +27,7 @@ class ProductRequest extends FormRequest
             'name'=>'required|max:255|unique:products,name',
             'price'=>'required|numeric',
             'old_price'=>'numeric',
-            'availability'=>'required|boolean',
+//            'availability'=>'required|boolean',
             'count'=>'required|integer',
             'category_id'=>'required|integer',
         ];

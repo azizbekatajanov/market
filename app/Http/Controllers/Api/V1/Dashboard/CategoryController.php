@@ -17,7 +17,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return $category = CategoryResource::collection(Category::all());
+        $categories = Category::select('id', 'name', 'created_at')->paginate(2);
+        return $category = CategoryResource::collection($categories);
+//        return $categories;
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,23 +13,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
-     * @return
+     * @return \Illuminate\Database\Eloquent\Builder
      */
     public function index()
     {
-        $product = Product::all();
-        return $product;
-//        $ProductAll= Product::with('image')->paginate(12);
-//        return $ProductAll;
+        $products = Product::with('image')->get();
 
+        return $products;
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(ProductRequest $request)
     {
@@ -37,12 +35,22 @@ class ProductController extends Controller
             'price'=>$request->price,
             'old_price'=>$request->old_price,
             'count'=>$request->count,
-            'category_id'=>$request->category_id
+            'category_id'=>$request->category_id,
+            'brand_id'=>$request->brand_id,
+            'availability'=>0,
+            'amount'=>0
         ]);
 
-        if ($request->hasFile('image')){
-
-        }
+            for($i = 1; $i <= 4; $i++) {
+                if ($request->hasFile('image' . $i)) {
+                    $image = 'image'.$i;
+                    Image::create([
+                        'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
+                        'product_id' => $product->id
+                    ]);
+                }
+            }
+        return $product;
     }
 
     /**
@@ -53,27 +61,30 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $ProductOne = Product::with('image')->find($id);
-        return $ProductOne;
+        $product = Product::with('image')->find($id);
+        return $product;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $product
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        $product=Product::findOrFail($id);
-        $product->name=$request->name;
-        $product->price=$request->price;
-        $product->old_price=$request->old_price;
-        $product->availability=$request->availability;
-        $product->count=$request->count;
-        $product->category_id=$request->category_id;
-        $product->save();
+        for($i = 1; $i <= 4; $i++) {
+            if ($request->hasFile('image' . $i)) {
+                $image = 'image'.$i;
+                Image::create([
+                    'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+        $product->update($request->validated());
+
         return $product;
     }
 
@@ -81,11 +92,13 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
-        return "Successfully deleted";
+        return response()->json([
+            'message'=> 'Successfully deleted'
+        ]);
     }
 }

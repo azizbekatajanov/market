@@ -13,13 +13,14 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        $categories = Category::select('id', 'name', 'created_at')->paginate(2);
-        return $category = CategoryResource::collection($categories);
+        $categories = Category::select('id', 'name', 'created_at')->paginate(10);
+//        return response()->json(CategoryResource::collection($categories));
 //        return $categories;
+        return $category = response()->json($categories);
     }
 
     /**

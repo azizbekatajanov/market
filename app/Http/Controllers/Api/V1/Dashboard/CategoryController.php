@@ -23,14 +23,6 @@ class CategoryController extends Controller
 //        return $category = response()->json($categories);
         $categories = Category::paginate(10);
         $response = [
-            'pagination' => [
-                'total' => $categories->total(),
-                'per_page' => $categories->perPage(),
-                'current_page' => $categories->currentPage(),
-                'last_page' => $categories->lastPage(),
-                'from' => $categories->firstItem(),
-                'to' => $categories->lastItem()
-            ],
             'data' => $categories
         ];
         return response()->json($response);

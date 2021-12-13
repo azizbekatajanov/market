@@ -22,10 +22,7 @@ class CategoryController extends Controller
 //        return $categories;
 //        return $category = response()->json($categories);
         $categories = Category::paginate(10);
-        $response = [
-            'data' => $categories
-        ];
-        return response()->json($response);
+        return response()->json($categories);
     }
 
     /**

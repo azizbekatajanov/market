@@ -21,7 +21,7 @@ class CategoryController extends Controller
 //        return CategoryResource::collection($categories);
 //        return $categories;
 //        return $category = response()->json($categories);
-        $categories = Category::paginate(10);
+        $categories = Category::paginate(3);
         return response()->json($categories);
     }
 

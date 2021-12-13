@@ -17,10 +17,23 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::select('id', 'name', 'created_at')->paginate(10);
-//        return response()->json(CategoryResource::collection($categories));
+//        $categories = Category::paginate(10);
+//        return CategoryResource::collection($categories);
 //        return $categories;
-        return $category = response()->json($categories);
+//        return $category = response()->json($categories);
+        $categories = Category::paginate(10);
+        $response = [
+            'pagination' => [
+                'total' => $categories->total(),
+                'per_page' => $categories->perPage(),
+                'current_page' => $categories->currentPage(),
+                'last_page' => $categories->lastPage(),
+                'from' => $categories->firstItem(),
+                'to' => $categories->lastItem()
+            ],
+            'data' => $categories
+        ];
+        return response()->json($response);
     }
 
     /**

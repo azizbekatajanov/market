@@ -43,6 +43,7 @@ Route::prefix('dashboard')->group(function () {
 //    Route::apiResource('categories', \App\Http\Controllers\Api\V1\Dashboard\CategoryController::class);
     Route::resources([
         'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
-        'product'=>\App\Http\Controllers\Api\V1\Dashboard\ProductController::class
+        'products'=>\App\Http\Controllers\Api\V1\Dashboard\ProductController::class,
+        'users'=>\App\Http\Controllers\Api\V1\Dashboard\UserController::class
     ]);
 });

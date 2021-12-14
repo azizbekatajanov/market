@@ -57,4 +57,10 @@ class User extends Authenticatable
         return $this->hasMany(Image::class,'product_id');
     }
 
+    protected $appends = ['full_name'];
+    public function getFullNameAttribute()
+    {
+        return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
+    }
+
 }

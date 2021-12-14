@@ -17,12 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-//        $categories = Category::paginate(10);
-//        return CategoryResource::collection($categories);
-//        return $categories;
-//        return $category = response()->json($categories);
-        $categories = Category::paginate(3);
-        return response()->json($categories);
+        $categories = Category::paginate(5);
+        return CategoryResource::collection($categories);
     }
 
     /**

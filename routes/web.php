@@ -21,7 +21,7 @@ Route::get('/login', function (){
 })->name('auth.login');
 
 Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product'])->middleware('auth');
-Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout'])->middleware('auth');
+Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout']);
 Route::get('/store',[\App\Http\Controllers\HomeController::class,'store']);
 Route::get('/blank',[\App\Http\Controllers\HomeController::class,'blank']);
 

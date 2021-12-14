@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrdersUsersRequest;
 use App\Models\Cart;
 use App\Models\OrdersUsers;
 use App\Models\OrdersUsersList;
@@ -29,7 +30,7 @@ class OrdesUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrdersUsersRequest $request)
     {
         $OrdersUsers=new OrdersUsers();
         $OrdersUsers->user_id=auth()->id();
@@ -41,6 +42,7 @@ class OrdesUserController extends Controller
         $OrdersUsers->country=$request->country;
         $OrdersUsers->zip_code=$request->zip_code;
         $OrdersUsers->tel=$request->tel;
+        $OrdersUsers->order_notes=$request->order_notes;
         $OrdersUsers->save();
           $search=OrdersUsers::all()->where('user_id' ,'==',auth()->id())->sortByDesc('id')->first();
           $usercart=Cart::where('user_id' ,'=',$search->user_id)->get();

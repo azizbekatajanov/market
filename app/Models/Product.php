@@ -22,7 +22,7 @@ class Product extends Model
 
     use HasFactory;
     public function image(){
-        return $this->hasMany(Image::class)->select('name','product_id');
+        return $this->hasMany(Image::class)->select('id','name','product_id');
     }
     public function category() {
         return $this->belongsTo(Category::class);
@@ -31,5 +31,8 @@ class Product extends Model
     public function getAvailabilityAttribute() {
         if($this->quantity > 0) return 1;
         else return 0;
+    }
+    public function brand(){
+        return $this->belongsTo(Brand::class)->select('id','name');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdersUsersListsTable extends Migration
+class CreateUserOrdersListsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class CreateOrdersUsersListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('orders_users_lists', function (Blueprint $table) {
+        Schema::create('user_orders_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('orders_users_id')->constrained();
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId('product_id');
-            $table->decimal('price');
-            $table->integer('amount');
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ class CreateOrdersUsersListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orders_users_lists');
+        Schema::dropIfExists('user_orders_lists');
     }
 }

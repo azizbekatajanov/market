@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrdersUsers extends Model
+class UserOrder extends Model
 {
     use HasFactory;
-
-    function UserOrders(){
-        return $this->hasMany(User::class);
-    }
 }

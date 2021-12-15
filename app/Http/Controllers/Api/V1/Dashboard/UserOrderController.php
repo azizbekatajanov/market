@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Api\V1\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\OrdersUsers;
 use App\Models\OrdersUsersList;
+use App\Models\UserOrder;
+use App\Models\UserOrdersList;
 use Illuminate\Http\Request;
 
-class OrdesUserController extends Controller
+class UserOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +18,7 @@ class OrdesUserController extends Controller
      */
     public function index()
     {
-        $cart=OrdersUsers::all();
+        $cart=UserOrder::all();
         return $cart;
     }
 
@@ -39,7 +41,7 @@ class OrdesUserController extends Controller
      */
     public function show($id)
     {
-        $search=OrdersUsersList::where('orders_users_id',$id)->get();
+        $search=UserOrdersList::where('orders_users_id',$id)->get();
     }
 
     /**
@@ -51,7 +53,7 @@ class OrdesUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $OrdersUsers=OrdersUsers::findOrFail($id);
+        $OrdersUsers=UserOrder::findOrFail($id);
         $OrdersUsers->user_id=auth()->id();
         $OrdersUsers->first_name=$request->first_name;
         $OrdersUsers->last_name=$request->last_name;

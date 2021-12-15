@@ -25,12 +25,12 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
     public function store(UserRequest $request)
     {
-//        $user = User::create($request->validated());
-//        return new UserResource($user);
+        $user = User::create($request->validated());
+        return new UserResource($user);
     }
 
     /**

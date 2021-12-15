@@ -27,4 +27,9 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+    protected $appends = ['availability'];
+    public function getAvailabilityAttribute() {
+        if($this->quantity > 0) return 1;
+        else return 0;
+    }
 }

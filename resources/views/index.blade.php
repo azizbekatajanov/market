@@ -17,7 +17,7 @@
                     <li><a href="#">Laptops</a></li>
                     <li><a href="#">Smartphones</a></li>
                     <li><a href="#">Cameras</a></li>
-                    <li><a href="#">Accessories</a></li>
+
                 </ul>
                 <!-- /NAV -->
             </div>

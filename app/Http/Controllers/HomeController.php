@@ -26,4 +26,5 @@ class HomeController extends Controller
     public function blank(){
         return view('blank.blank');
     }
+
 }

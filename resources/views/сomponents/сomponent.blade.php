@@ -13,7 +13,7 @@
 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
-
+    <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}"/>
@@ -55,10 +55,25 @@
             @guest()
                 <ul class="header-links pull-right">
                     <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{$language['flag-icon']}}"></span> {{$language['display']}}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </li>
+                    <h3 style="color: #fff3cd">{{__('messages.welcome')}}</h3>
                 </ul>
+
             @endguest
         </div>
     </div>
+
     <!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->

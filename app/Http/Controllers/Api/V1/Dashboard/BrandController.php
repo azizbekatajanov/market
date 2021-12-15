@@ -53,6 +53,7 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, Brand $brand)
     {
+//        dd($request->id);
         $brand->update($request->validated());
         return new BrandResource($brand);
     }

@@ -15,11 +15,7 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('orders_users_id')->constrained();
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId('product_id');
-            $table->decimal('price');
-            $table->integer('amount');
+            $table->string('name');
             $table->timestamps();
         });
     }

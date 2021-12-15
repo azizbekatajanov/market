@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\Dashboard\ProductResource;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -13,13 +14,13 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
     public function index()
     {
-        $products = Product::with('image')->get();
+        $products = Product::with('brand', 'category', 'image')->get();
 
-        return $products;
+        return ProductResource::collection($products);
     }
 
     /**
@@ -34,11 +35,9 @@ class ProductController extends Controller
             'name'=>$request->name,
             'price'=>$request->price,
             'old_price'=>$request->old_price,
-            'count'=>$request->count,
+            'quantity'=>$request->quantity,
             'category_id'=>$request->category_id,
             'brand_id'=>$request->brand_id,
-            'availability'=>0,
-            'amount'=>0
         ]);
 
             for($i = 1; $i <= 4; $i++) {

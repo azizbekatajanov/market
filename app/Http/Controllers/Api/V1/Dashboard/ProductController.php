@@ -34,11 +34,9 @@ class ProductController extends Controller
             'name'=>$request->name,
             'price'=>$request->price,
             'old_price'=>$request->old_price,
-            'count'=>$request->count,
+            'quantity'=>$request->quantity,
             'category_id'=>$request->category_id,
             'brand_id'=>$request->brand_id,
-            'availability'=>0,
-            'amount'=>0
         ]);
 
             for($i = 1; $i <= 4; $i++) {

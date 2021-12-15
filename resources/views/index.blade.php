@@ -3,10 +3,7 @@
 
 @endsection
 @section('body')
-
-
-
-    <!-- NAVIGATION -->
+   <!-- NAVIGATION -->
     <nav id="navigation">
         <!-- container -->
         <div class="container">
@@ -20,12 +17,13 @@
                     <li><a href="#">Laptops</a></li>
                     <li><a href="#">Smartphones</a></li>
                     <li><a href="#">Cameras</a></li>
-                    <li><a href="#">Accessories</a></li>
+
                 </ul>
                 <!-- /NAV -->
             </div>
             <!-- /responsive-nav -->
         </div>
+
         <!-- /container -->
     </nav>
     <!-- /NAVIGATION -->
@@ -506,8 +504,6 @@
         </div>
         <!-- /container -->
     </div>
-    <!-- /SECTION -->
-
     <!-- SECTION -->
     <div class="section">
         <!-- container -->
@@ -836,16 +832,10 @@
         </div>
         <!-- /container -->
     </div>
-    <!-- /NEWSLETTER -->
-
-
-
 
 @endsection
 
 @section('script')
-
-
     <script>
         const db  = axios.get('https://jsonplaceholder.typicode.com/todos/1')
             .then(async res => await console.log(res))
@@ -878,6 +868,4 @@
         }
         getDb()
     </script>
-
-
 @endsection

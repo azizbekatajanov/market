@@ -13,7 +13,7 @@
 
     <!-- Bootstrap -->
     <link type="text/css" rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}"/>
-
+    <link type="text/css" rel="stylesheet" href="{{asset('css/app.css')}}">
     <!-- Slick -->
     <link type="text/css" rel="stylesheet" href="{{asset('css/slick.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{asset('css/slick-theme.css')}}"/>
@@ -29,6 +29,10 @@
 
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     @yield('head')
 </head>
 
@@ -43,12 +47,33 @@
                 <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
                 <li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
             </ul>
+            @auth()
             <ul class="header-links pull-right">
-                <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-                <li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+                <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> My Account</a></li>
             </ul>
+            @endauth
+            @guest()
+                <ul class="header-links pull-right">
+                    <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{$language['flag-icon']}}"></span> {{$language['display']}}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                    </li>
+                    <h3 style="color: #fff3cd">{{__('messages.welcome')}}</h3>
+                </ul>
+
+            @endguest
         </div>
     </div>
+
     <!-- /TOP HEADER -->
 
     <!-- MAIN HEADER -->
@@ -230,6 +255,7 @@
         </div>
         <!-- /container -->
     </div>
+
     <!-- /top footer -->
 
     <!-- bottom footer -->
@@ -260,6 +286,7 @@
     <!-- /bottom footer -->
 </footer>
 <!-- /FOOTER -->
+
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/slick.min.js')}}"></script>

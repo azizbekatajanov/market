@@ -16,11 +16,9 @@ class HomeController extends Controller
         return view('productes.product',compact('id'));
     }
 
-
     public function checkout(){
         return view('checkout.checkout');
     }
-
 
     public function store(){
         return view('store.store');
@@ -28,4 +26,5 @@ class HomeController extends Controller
     public function blank(){
         return view('blank.blank');
     }
+
 }

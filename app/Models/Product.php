@@ -21,18 +21,21 @@ class Product extends Model
     ];
 
     use HasFactory;
-    public function image(){
-        return $this->hasMany(Image::class)->select('id','name','product_id');
+    public function brand(){
+        return $this->belongsTo(Brand::class)->select('id','name');
     }
+
     public function category() {
         return $this->belongsTo(Category::class)->select('id', 'name');
     }
+
+    public function image(){
+        return $this->hasMany(Image::class)->select('id','name','product_id');
+    }
+
     protected $appends = ['availability'];
     public function getAvailabilityAttribute() {
         if($this->quantity > 0) return 1;
         else return 0;
-    }
-    public function brand(){
-        return $this->belongsTo(Brand::class)->select('id','name');
     }
 }

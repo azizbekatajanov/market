@@ -30,10 +30,18 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $user = User::create($request->validated());
+        dd($request->validated());
         return new UserResource($user);
     }
 
     /**
+//        $user = User::create([
+//            "username" => "UserName"
+//            "first_name" => "firstname"
+//            "email" => "email@mail.ru"
+//            "password" => "12345678"
+//            "avatar" => $request->file('avatar')->store('avatars');
+//        ]);
      * Display the specified resource.
      *
      * @param  int  $id

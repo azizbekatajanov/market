@@ -20,9 +20,7 @@ class ProductResource extends JsonResource
             'price'=>$this->price,
             'old_price'=>$this->old_price,
             'quantity'=>$this->quantity,
-//            'brand_id'=>$this->brand->id,
             'brand'=>$this->brand,
-//            'category_id'=>$this->category->id,
             'category'=>$this->category,
             'image' => $this->image
         ];

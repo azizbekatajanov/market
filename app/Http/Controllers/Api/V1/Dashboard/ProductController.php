@@ -18,9 +18,14 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
 
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('brand', 'category', 'image')->get();
+        if(isset($request->limit)){
+            $products = Product::with('brand', 'category', 'image')->paginate($request->limit);
+        }
+        else{
+            $products = Product::with('brand', 'category', 'image')->get();
+        }
 
         return ProductResource::collection($products);
     }
@@ -45,7 +50,8 @@ class ProductController extends Controller
         if($request->hasFile('images')) {
             foreach ($request->images as $image) {
                 Image::create([
-                    'name' => Storage::disk('local')->putFile('product_images/'.$product->id, $image),
+                    $name = Storage::disk('product_images')->putFile("$product->id", $image),
+                    'name' => basename($name),
                     'product_id' => $product->id
                 ]);
             }
@@ -70,34 +76,24 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $product
-     * @return \Illuminate\Http\JsonResponse
+     * @return Product|\Illuminate\Http\JsonResponse|int
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $images = Image::where('product_id', $product->id)->get();
-        dd($images);
         $product->update($request->validated());
-        if ($request->hasFile('images')) {
-            foreach ($request->images as $image) {
-                dd($product->id);
-                $cimage = Image::where('product_id', $product->id)->get();
-                $temp_path = $cimage->name;
-                $cimage->name = Storage::disk('local')->putFile('product_images/' . $product->id, $image);
-                $cimage->name = Storage::disk('local')->delete($temp_path);
-                $cimage->save();
+        $old_images = Image::where('product_id', $product->id)->get();
+        $new_images = $request->images;
+
+        foreach ($old_images as $old_image) {
+            foreach ($new_images as $key => $new_image) {
+                if ($old_image->id == $key) {
+                    Storage::disk('product_images')->delete($old_image->name);
+                    $name = Storage::disk('product_images')->putFile($product->id, $new_image);
+                    $old_image->name = basename($name);
+                    $old_image->update();
+                }
             }
         }
-//        for($i = 1; $i <= 4; $i++) {
-//            if ($request->hasFile('image' . $i)) {
-//                $image = 'image'.$i;
-//                Image::create([
-//                    'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
-//                    'product_id' => $product->id
-//                ]);
-//            }
-//        }
-//        $product->update($request->validated());
-
         return $product;
     }
 
@@ -110,6 +106,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
+        Storage::disk('product_images')->deleteDirectory($id);
         return response()->json([
             'message'=> 'Successfully deleted'
         ]);

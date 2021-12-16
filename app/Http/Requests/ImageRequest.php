@@ -24,7 +24,7 @@ class ImageRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255',
+//            'name'=>'required|max:255',
             'product_id'=>'required|integer'
         ];
     }

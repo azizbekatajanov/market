@@ -33,7 +33,6 @@ class UserController extends Controller
         dd($request->validated());
         return new UserResource($user);
     }
-
     /**
 //        $user = User::create([
 //            "username" => "UserName"

@@ -17,7 +17,12 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $categories = Category::paginate($request->limit);
+        if(isset($request->limit)) {
+            $categories = Category::paginate($request->limit);
+        }
+        else {
+            $categories = Category::all();
+        }
         return CategoryResource::collection($categories);
     }
 

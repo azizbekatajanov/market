@@ -57,18 +57,26 @@
                     <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
+                            @if(app()->getLocale() == 'en')
+                                <span class="flag-icon flag-icon-gb"></span> {{ app()->getLocale() }}
+                            @else
+                            <span class="flag-icon flag-icon-{{app()->getLocale()}}"></span> {{ app()->getLocale() }}
+                            @endif
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            @foreach (Config::get('languages') as $lang => $language)
-                                @if ($lang != App::getLocale())
-                                    <a class="dropdown-item" href="{{ route('lang.switch', $lang) }}"><span class="flag-icon flag-icon-{{$language['flag-icon']}}"></span> {{$language['display']}}</a>
+                            @foreach (config('app.available_locales') as $locale)
+                                @if ($locale != app()->getLocale())
+                                    <a class="dropdown-item" href="{{ route(\Illuminate\Support\Facades\Route::currentRouteName(), $locale) }}">
+                                        <span class="flag-icon flag-icon-{{$locale}}"></span>
+                                        {{ strtoupper($locale) }}
+                                    </a>
                                 @endif
                             @endforeach
                         </div>
                     </li>
                     <h3 style="color: #fff3cd">{{__('messages.welcome')}}</h3>
                 </ul>
+
 
             @endguest
         </div>

@@ -15,9 +15,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::paginate(5);
+        $categories = Category::paginate($request->limit);
         return CategoryResource::collection($categories);
     }
 

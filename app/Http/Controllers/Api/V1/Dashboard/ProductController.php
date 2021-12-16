@@ -8,6 +8,7 @@ use App\Http\Resources\Dashboard\ProductResource;
 use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -31,6 +32,7 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+//        dd($request->images);
         $product = Product::create([
             'name'=>$request->name,
             'price'=>$request->price,
@@ -40,15 +42,24 @@ class ProductController extends Controller
             'brand_id'=>$request->brand_id,
         ]);
 
-            for($i = 1; $i <= 4; $i++) {
-                if ($request->hasFile('image' . $i)) {
-                    $image = 'image'.$i;
-                    Image::create([
-                        'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
-                        'product_id' => $product->id
-                    ]);
-                }
+//            for($i = 1; $i <= 4; $i++) {
+//                if ($request->hasFile('image' . $i)) {
+//                    $image = 'image'.$i;
+//                    Image::create([
+//                        'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
+//                        'product_id' => $product->id
+//                    ]);
+//                }
+//            }
+
+        if($request->hasFile('images')) {
+            foreach ($request->images as $image) {
+                Image::create([
+                    'name' => Storage::disk('local')->putFile('product_images'.$product->id, $image),
+                    'product_id' => $product->id
+                ]);
             }
+        }
         return $product;
     }
 

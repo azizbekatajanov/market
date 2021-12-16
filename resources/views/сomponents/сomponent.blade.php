@@ -39,7 +39,6 @@
 <body>
 <!-- HEADER -->
 <header>
-    <img src="/storage/1/cowg3tfPsNuE6lTuW9F6VK8z2sHVIjbyJg7FolBA.jpg" alt="asdasd" width="1000">
 
     <!-- TOP HEADER -->
     <div id="top-header">

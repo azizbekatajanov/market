@@ -25,9 +25,11 @@ class ProductRequest extends FormRequest
     {
         return [
             'name'=>'required|max:255|unique:products,name',
-            'price'=>'required',
-            'old_price'=>'numeric',
-            'quantity'=>'required',
+            'price'=>'required|integer',
+            'old_price'=>'integer',
+            'quantity'=>'required|integer',
+            'brand_id'=>'integer',
+            'category_id'=>'integer'
         ];
     }
 }

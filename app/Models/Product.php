@@ -29,14 +29,10 @@ class Product extends Model
         return $this->belongsTo(Category::class)->select('id', 'name');
     }
 
-    public function images(){
+    public function image(){
         return $this->hasMany(Image::class)->select('id','name','product_id');
     }
 
-    public function image()
-    {
-        return $this->belongsTo(Image::class)->select('*');
-    }
 
     protected $appends = ['availability'];
     public function getAvailabilityAttribute() {

@@ -13,11 +13,16 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $brands = Brand::paginate(5);
+        if (isset($request->limit)){
+            $brands = Brand::paginate($request->limit);
+        }
+        else{
+            $brands = Brand::all();
+        }
         return BrandResource::collection($brands);
     }
 
@@ -25,7 +30,7 @@ class BrandController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return BrandResource
      */
     public function store(BrandRequest $request)
     {
@@ -53,6 +58,7 @@ class BrandController extends Controller
      */
     public function update(BrandRequest $request, Brand $brand)
     {
+//        dd($request->id);
         $brand->update($request->validated());
         return new BrandResource($brand);
     }
@@ -61,7 +67,7 @@ class BrandController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {

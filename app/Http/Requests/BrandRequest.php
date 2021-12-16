@@ -24,7 +24,7 @@ class BrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255|unique:brands,name'.($this->id !== null ? ','.$this->id :'')
+            'name'=>'required|max:255|unique:brands,name'
         ];
     }
 }

@@ -17,6 +17,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
+
     public function index()
     {
         $products = Product::with('brand', 'category', 'image')->get();
@@ -30,32 +31,21 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
+
     public function store(ProductRequest $request)
     {
-//        dd($request->images);
         $product = Product::create([
             'name'=>$request->name,
             'price'=>$request->price,
             'old_price'=>$request->old_price,
             'quantity'=>$request->quantity,
             'category_id'=>$request->category_id,
-            'brand_id'=>$request->brand_id,
+            'brand_id'=>$request->brand_id
         ]);
-
-//            for($i = 1; $i <= 4; $i++) {
-//                if ($request->hasFile('image' . $i)) {
-//                    $image = 'image'.$i;
-//                    Image::create([
-//                        'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
-//                        'product_id' => $product->id
-//                    ]);
-//                }
-//            }
-
         if($request->hasFile('images')) {
             foreach ($request->images as $image) {
                 Image::create([
-                    'name' => Storage::disk('local')->putFile('product_images'.$product->id, $image),
+                    'name' => Storage::disk('local')->putFile('product_images/'.$product->id, $image),
                     'product_id' => $product->id
                 ]);
             }
@@ -84,16 +74,29 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        for($i = 1; $i <= 4; $i++) {
-            if ($request->hasFile('image' . $i)) {
-                $image = 'image'.$i;
-                Image::create([
-                    'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
-                    'product_id' => $product->id
-                ]);
+        $images = Image::where('product_id', $product->id)->get();
+        dd($images);
+        $product->update($request->validated());
+        if ($request->hasFile('images')) {
+            foreach ($request->images as $image) {
+                dd($product->id);
+                $cimage = Image::where('product_id', $product->id)->get();
+                $temp_path = $cimage->name;
+                $cimage->name = Storage::disk('local')->putFile('product_images/' . $product->id, $image);
+                $cimage->name = Storage::disk('local')->delete($temp_path);
+                $cimage->save();
             }
         }
-        $product->update($request->validated());
+//        for($i = 1; $i <= 4; $i++) {
+//            if ($request->hasFile('image' . $i)) {
+//                $image = 'image'.$i;
+//                Image::create([
+//                    'name'=> $request->file("image".$i)->store('product_images/'.$product->id),
+//                    'product_id' => $product->id
+//                ]);
+//            }
+//        }
+//        $product->update($request->validated());
 
         return $product;
     }

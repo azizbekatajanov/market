@@ -22,8 +22,6 @@ class SetLocale
             app()->setLocale($request->segment(1));
         }
 
-
-
         return $next($request);
     }
 }

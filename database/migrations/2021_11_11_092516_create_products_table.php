@@ -18,9 +18,9 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->decimal('price');
             $table->decimal('old_price')->nullable();
-            $table->boolean('availability');
-            $table->integer('count');
-            $table->foreignId('category_id')->constrained();
+            $table->integer('quantity');
+            $table->foreignId('brand_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

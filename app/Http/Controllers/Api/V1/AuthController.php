@@ -29,18 +29,21 @@ class AuthController extends Controller
             'last_name'=>$request->last_name,
             'email'=>$request->email,
             'password'=>Hash::make($request->password),
-            'avatar'=> Storage::putFile('avatars' , $request->file('avatar'))
+//            'avatar'=> Storage::putFile('avatars' , $request->file('avatar'))
 
         ]);
+        if ($request->hasFile('avatar')){
+            $user->avatar = $request->file('avatar')->store('avatars/'.$user->id);
+            $user->save();
+        }
 
-//        $user->avatar = $request->file('avatar')->store('avatars/'.$user->id);
-//        $user->save();
         $user->assignRole('user');
 
         $token = $user->createToken('auth_token')->plainTextToken;
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+//            'user'=>$user
         ]);
 
     }

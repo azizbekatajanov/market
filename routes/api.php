@@ -15,10 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 Route::apiResources([
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
-    'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
-
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
-
+    'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
 ]);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
@@ -42,7 +40,12 @@ Route::get('/store/minmax', [\App\Http\Controllers\Api\v1\FilterController::clas
 
 Route::prefix('dashboard')->group(function () {
 //    Route::apiResource('categories', \App\Http\Controllers\Api\V1\Dashboard\CategoryController::class);
-    Route::resources([
-        'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class
+    Route::apiResources([
+        'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
+        'products'=>\App\Http\Controllers\Api\V1\Dashboard\ProductController::class,
+        'users'=>\App\Http\Controllers\Api\V1\Dashboard\UserController::class,
+        'brands'=>\App\Http\Controllers\Api\V1\Dashboard\BrandController::class
     ]);
 });
+
+//Route::resource('dashboard/users', \App\Http\Controllers\Api\V1\Dashboard\UserController::class);

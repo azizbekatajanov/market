@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrandRequest extends FormRequest
+class PermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class BrandRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>"required|max:255|unique:brands,name,{$this->brand->id}"
+            'name'=>"required|max:255|unique:permissions,name,{$this->permission->id}"
         ];
     }
 }

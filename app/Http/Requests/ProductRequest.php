@@ -24,7 +24,7 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|max:255|unique:products,name',
+            'name'=>"required|max:255|unique:products,name,{$this->product->id}",
             'price'=>'required|integer',
             'old_price'=>'integer',
             'quantity'=>'required|integer',

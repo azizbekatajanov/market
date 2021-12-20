@@ -50,7 +50,7 @@ class ProductController extends Controller
         if($request->hasFile('images')) {
             foreach ($request->images as $image) {
                 Image::create([
-                    'name' => Storage::disk('product_images')->putFile("$product->id", $image),
+                    'name' => Storage::disk('product_images')->put("$product->id", $image),
                     'product_id' => $product->id
                 ]);
             }
@@ -83,8 +83,8 @@ class ProductController extends Controller
         $new_images = $request->images;
 
         foreach ($old_images as $old_image) {
-            foreach ($new_images as $key => $new_image) {
-                if ($old_image->id == $key) {
+            foreach ($new_images as $image) {
+                if ($old_image->id == $image->id) {
                     Storage::disk('product_images')->delete($old_image->name);
                     $old_image->name = Storage::disk('product_images')->putFile($product->id, $new_image);
                     $old_image->update();

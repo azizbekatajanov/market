@@ -17,7 +17,6 @@ Route::apiResources([
     'image'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
     'product'=>\App\Http\Controllers\Api\V1\ProductController::class,
-
 ]);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {

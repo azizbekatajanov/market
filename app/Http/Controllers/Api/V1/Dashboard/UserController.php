@@ -15,9 +15,10 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
+        if(isset($request->limit)) $users = User::paginate($request->limit);
+        else $users = User::all();
         return UserResource::collection($users);
     }
 
@@ -29,18 +30,11 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+//        dd($request->validated());
         $user = User::create($request->validated());
-        dd($request->validated());
         return new UserResource($user);
     }
     /**
-//        $user = User::create([
-//            "username" => "UserName"
-//            "first_name" => "firstname"
-//            "email" => "email@mail.ru"
-//            "password" => "12345678"
-//            "avatar" => $request->file('avatar')->store('avatars');
-//        ]);
      * Display the specified resource.
      *
      * @param  int  $id
@@ -73,6 +67,7 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return response()->json([
-            'message'=> 'Successfully deleted!']);
+            'message'=> 'Successfully deleted!'
+        ]);
     }
 }

@@ -38,7 +38,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $role = Role::create($request->validated());
-        $role->permissions()->sync($request->input('permissions.*.id',[]));
+        $role->permissions()->sync($request->input('permissions.*.id', []));
         return (new RoleResource($role))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 

@@ -17,12 +17,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->limit)){
-            $users = User::paginate($request->limit);
-        }
-        else{
-            $users = User::all();
-        }
+        if(isset($request->limit)) $users = User::paginate($request->limit);
+        else $users = User::all();
         return UserResource::collection($users);
     }
 
@@ -40,13 +36,7 @@ class UserController extends Controller
         return new UserResource($user);
     }
     /**
-* //        $user = User::create([
-* //            "username" => "UserName"
-* //            "first_name" => "firstname"
-* //            "email" => "email@mail.ru"
-* //            "password" => "12345678"
-* //            "avatar" => $request->file('avatar')->store('avatars');
-* //        ]);
+
      * Display the specified resource.
      *
      * @param  int  $id
@@ -60,11 +50,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UserRequest  $request
      * @param  int  $id
      * @return UserResource
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $user->update($request->validated());
         return new UserResource($user);
@@ -80,6 +70,7 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return response()->json([
-            'message'=> 'Successfully deleted!']);
+            'message'=> 'Successfully deleted!'
+        ]);
     }
 }

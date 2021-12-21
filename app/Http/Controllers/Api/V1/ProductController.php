@@ -15,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $ProductAll= Product::with('image')->paginate(12);
+        return session('locale');
+        $ProductAll= Product::with('image')->paginate(12);
        return $ProductAll;
     }
 

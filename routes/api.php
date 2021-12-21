@@ -45,6 +45,8 @@ Route::prefix('dashboard')->group(function () {
         'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
         'products'=>\App\Http\Controllers\Api\V1\Dashboard\ProductController::class,
         'users'=>\App\Http\Controllers\Api\V1\Dashboard\UserController::class,
-        'brands'=>\App\Http\Controllers\Api\V1\Dashboard\BrandController::class
+        'brands'=>\App\Http\Controllers\Api\V1\Dashboard\BrandController::class,
+        'permissions'=>\App\Http\Controllers\Api\V1\Dashboard\PermissionController::class,
+        'roles'=>\App\Http\Controllers\Api\V1\Dashboard\RoleController::class
     ]);
 });

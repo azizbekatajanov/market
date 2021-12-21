@@ -27,18 +27,20 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return UserResource
+     *
+     * @noinspection PhpVoidFunctionResultUsedInspection
      */
     public function store(UserRequest $request)
     {
-//        dd($request->validated());
         $user = User::create($request->validated());
         return new UserResource($user);
     }
     /**
+
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
     public function show($id)
     {
@@ -48,13 +50,14 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\UserRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+        return new UserResource($user);
     }
 
     /**

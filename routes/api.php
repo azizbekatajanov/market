@@ -39,7 +39,7 @@ Route::get('/store/minmax', [\App\Http\Controllers\Api\v1\FilterController::clas
 
 
 Route::prefix('dashboard')->group(function () {
-//    Route::apiResource('categories', \App\Http\Controllers\Api\V1\Dashboard\CategoryController::class);
+    Route::get('sort', [\App\Http\Controllers\Api\v1\dashboard\FilterProductController::class, 'sort']);
     Route::resources([
         'categories'=>\App\Http\Controllers\Api\V1\Dashboard\CategoryController::class,
         'products'=>\App\Http\Controllers\Api\V1\Dashboard\ProductController::class,

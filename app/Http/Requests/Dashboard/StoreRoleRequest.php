@@ -4,6 +4,8 @@ namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Http\Response;
+use Spatie\Permission\Models\Role;
 
 class StoreRoleRequest extends FormRequest
 {
@@ -26,18 +28,22 @@ class StoreRoleRequest extends FormRequest
     public function rules()
     {
         return [
-//            'name' => [
-//                'string',
-//                'required',
-//            ],
+            'name' => [
+                'string',
+                'required',
+            ],
+            'permissions*'=> [
+                'required', 'array','integer', 'exists:permissions,id',
+            ]
 //            'permissions' => [
 //                'required',
 //                'array',
 //            ],
-//            'permissions.*.id' => [
+//            ['permissions.*.id' => [
 //                'integer',
 //                'exists:permissions,id',
-//            ],
+//            ],]
+//            dd($this->permissions)
         ];
     }
 }

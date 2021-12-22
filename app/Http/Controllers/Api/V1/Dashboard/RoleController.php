@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\StoreRoleRequest;
+use App\Http\Requests\Dashboard\UpdateRoleRequest;
 use App\Http\Resources\Dashboard\RoleResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,7 +39,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
         $role = Role::create($request->validated());
-        $role->permissions()->sync($request->input('permissions.*.id', []));
+        $role->permissions()->sync($request->input("permissions.*.id", []));
         return (new RoleResource($role))->response()->setStatusCode(Response::HTTP_CREATED);
     }
 
@@ -50,7 +51,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//        abort_if(Gate::denies('role_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return new RoleResource($role->load(['permissions']));
     }
 
@@ -61,7 +62,7 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse|Response|object
      */
-    public function update(Request $request, Role $role)
+    public function update(UpdateRoleRequest $request, Role $role)
     {
         $role->update($request->validated());
         $role->permissions()->sync($request->input('permissions.*.id',[]));
@@ -76,7 +77,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+//        abort_if(Gate::denies('role_delete'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $role->delete();
         return response(null, Response::HTTP_NO_CONTENT);
     }

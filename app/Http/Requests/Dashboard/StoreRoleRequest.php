@@ -27,23 +27,30 @@ class StoreRoleRequest extends FormRequest
      */
     public function rules()
     {
+//        return [
+//            'name'             => 'string|required',
+//            'permissions'      => 'required|array',
+//            'permissions.*.id' => 'required|integer',
+//        ];
         return [
             'name' => [
                 'string',
                 'required',
             ],
-            'permissions*'=> [
-                'required', 'array','integer', 'exists:permissions,id',
-            ]
-//            'permissions' => [
-//                'required',
-//                'array',
-//            ],
-//            ['permissions.*.id' => [
-//                'integer',
-//                'exists:permissions,id',
-//            ],]
-//            dd($this->permissions)
+            'permissions' => [
+                'required',
+                'array',
+            ],
+            'permissions.*.id' => [
+                'integer',
+                'exists:permissions,id',
+            ],
         ];
     }
+//    public function messages()
+//    {
+//        return [
+//          'exists:permissions,id'=>'Permission is not exists'
+//        ];
+//    }
 }

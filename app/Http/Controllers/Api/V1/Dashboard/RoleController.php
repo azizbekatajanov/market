@@ -9,6 +9,7 @@ use App\Http\Resources\Dashboard\RoleResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -38,6 +39,10 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            "name"    => "required|array|min:3",
+            "names.*.id"  => "required|integer",
+        ]);
         $role = Role::create($request->validated());
         $role->permissions()->sync($request->input("permissions.*.id", []));
         return (new RoleResource($role))->response()->setStatusCode(Response::HTTP_CREATED);

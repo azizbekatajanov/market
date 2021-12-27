@@ -6,6 +6,7 @@ use App\Http\Resources\Dashboard\BrandResource;
 use App\Http\Resources\Dashboard\CategoryResource;
 use App\Http\Resources\Dashboard\ProductResource;
 use App\Http\Resources\Dashboard\UserResource;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\PersonalAccessToken;
 use Laravel\Sanctum\Sanctum;
@@ -34,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
         ProductResource::withoutWrapping();
         BrandResource::withoutWrapping();
         UserResource::withoutWrapping();
+//        Validator::excludeUnvalidatedArrayKeys();
     }
 }

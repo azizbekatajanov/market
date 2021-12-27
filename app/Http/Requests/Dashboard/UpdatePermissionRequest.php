@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PermissionRequest extends FormRequest
+class UpdatePermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +13,7 @@ class PermissionRequest extends FormRequest
      */
     public function authorize()
     {
+//        return Gate::allows('permission_edit');
         return true;
     }
 
@@ -24,7 +25,7 @@ class PermissionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>"required|max:255|unique:permissions,name,{$this->permission->id}"
+            'name'=>"required|string|max:255|unique:permissions,name,{$this->permission->id}"
         ];
     }
 }

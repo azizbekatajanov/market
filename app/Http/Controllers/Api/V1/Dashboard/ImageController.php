@@ -16,7 +16,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return Image::all();
+
     }
 
     /**
@@ -27,11 +27,20 @@ class ImageController extends Controller
      */
     public function store(ImageRequest $request)
     {
-        $image= new Image();
-        $image->name = $request->name;
-        $image->product_id = $request->product_id;
-        $image->save();
-        return $image;
+//            for($i = 1; $i <= 4; $i++) {
+//        $image= Image::create([
+//                if(isset($request->image[$i])) {
+//                    $image->name = $request->image[$i];
+//                    $image->product_id = 1;
+//                }
+//            }
+//        ]);
+//        $image->image = $request->image;
+//        $image->image2 = $request->image2;
+//        $image->image3 = $request->image3;
+//        $image->product_id = $request->product_id;
+//        $image->save();
+//        return $image;
     }
 
     /**

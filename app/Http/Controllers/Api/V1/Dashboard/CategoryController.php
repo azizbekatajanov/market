@@ -17,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return $category = CategoryResource::collection(Category::all());
+        $categories = Category::paginate(5);
+        return CategoryResource::collection($categories);
     }
 
     /**
@@ -66,6 +67,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findOrFail($id)->delete();
-        return "Successfully deleted";
+        return response()->json([
+            'message'=> 'Successfully deleted!']);
     }
 }

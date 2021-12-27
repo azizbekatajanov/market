@@ -4,41 +4,57 @@ namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use App\Http\Resources\Dashboard\ProductResource;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
-     * @return
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+
+    public function index(Request $request)
     {
+        if(isset($request->limit)){
+            $products = Product::with('brand', 'category', 'image')->paginate($request->limit);
+        }
+        else{
+            $products = Product::with('brand', 'category', 'image')->get();
+        }
 
-        $ProductAll= Product::with('image')->paginate(12);
-        return $ProductAll;
-
+        return ProductResource::collection($products);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
+
     public function store(ProductRequest $request)
     {
-        $product= new Product();
-        $product->name=$request->name;
-        $product->price=$request->price;
-        $product->old_price=$request->old_price;
-        $product->availability=$request->availability;
-        $product->count=$request->count;
-        $product->category_id=$request->category_id;
-        $product->save();
+        $product = Product::create([
+            'name'=>$request->name,
+            'price'=>$request->price,
+            'old_price'=>$request->old_price,
+            'quantity'=>$request->quantity,
+            'category_id'=>$request->category_id,
+            'brand_id'=>$request->brand_id
+        ]);
+        if($request->hasFile('images')) {
+            foreach ($request->images as $image) {
+                Image::create([
+                    'name' => Storage::disk('product_images')->put("$product->id", $image),
+                    'product_id' => $product->id
+                ]);
+            }
+        }
         return $product;
     }
 
@@ -50,27 +66,31 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $ProductOne = Product::with('image')->find($id);
-        return $ProductOne;
+        $product = Product::with('image')->find($id);
+        return $product;
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  int  $product
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        $product=Product::findOrFail($id);
-        $product->name=$request->name;
-        $product->price=$request->price;
-        $product->old_price=$request->old_price;
-        $product->availability=$request->availability;
-        $product->count=$request->count;
-        $product->category_id=$request->category_id;
-        $product->save();
+        $old_images = Image::where('product_id', $product->id)->get();
+        $new_images = $request->images;
+
+        foreach ($old_images as $old_image) {
+            foreach ($new_images as $image) {
+                if ($old_image->id == $image->id) {
+                    Storage::disk('product_images')->delete($old_image->name);
+                    $old_image->name = Storage::disk('product_images')->putFile($product->id, $new_image);
+                    $old_image->update();
+                }
+            }
+        }
         return $product;
     }
 
@@ -78,11 +98,14 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
         Product::findOrFail($id)->delete();
-        return "Successfully deleted";
+        Storage::disk('product_images')->deleteDirectory($id);
+        return response()->json([
+            'message'=> 'Successfully deleted'
+        ]);
     }
 }

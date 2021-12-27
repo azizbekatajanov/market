@@ -6,7 +6,8 @@
                 <div class="row">
                     <div class="col-md-10 ml-auto mr-auto">
                         <div class="card card-signup">
-                            <h2 class="card-title text-center">Register</h2>
+                            <h2 class="card-title text-center">{{__('messages.Register')}}</h2>
+                            <h2 class="card-title text-center">{{__('messages.welcome')}}</h2>
                             <div class="card-body">
                                 <div class="row align-items-center">
                                     <form class="form" method="POST" @submit.prevent="sendData" enctype="multipart/form-data">
@@ -84,7 +85,7 @@
                                         </div>
 
                                             <div class="text-center">
-                                                <button class="btn btn-primary btn-round mt-4" @submit="sendData">Get Started</button>
+                                                <button class="btn btn-primary btn-round mt-4" @submit="sendData">{{__('messages.Get Started')}}</button>
                                             </div>
                                         </form>
 

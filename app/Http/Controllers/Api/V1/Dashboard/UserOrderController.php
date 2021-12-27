@@ -1,23 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\OrdersUsers;
+use App\Models\OrdersUsersList;
+use App\Models\UserOrder;
+use App\Models\UserOrdersList;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class UserOrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return UserOrder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
     public function index()
     {
-        return session('locale');
-        $ProductAll= Product::with('image')->paginate(12);
-       return $ProductAll;
+        $cart=UserOrder::all();
+        return $cart;
     }
 
     /**
@@ -28,15 +30,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//        $product= new Product();
-//        $product->name=$request->name;
-//        $product->price=$request->price;
-//        $product->old_price=$request->old_price;
-//        $product->availability=$request->availability;
-//        $product->count=$request->count;
-//        $product->category_id=$request->category_id;
-//        $product->save();
-//        return $product;
+        //
     }
 
     /**
@@ -47,9 +41,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
-        $ProductOne = Product::with('image')->find($id);
-        return $ProductOne;
+        $search=UserOrdersList::where('orders_users_id',$id)->get();
     }
 
     /**
@@ -61,7 +53,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $OrdersUsers=UserOrder::findOrFail($id);
+        $OrdersUsers->user_id=auth()->id();
+        $OrdersUsers->first_name=$request->first_name;
+        $OrdersUsers->last_name=$request->last_name;
+        $OrdersUsers->email=$request->email;
+        $OrdersUsers->address=$request->address;
+        $OrdersUsers->city=$request->city;
+        $OrdersUsers->country=$request->country;
+        $OrdersUsers->zip_code=$request->zip_code;
+        $OrdersUsers->tel=$request->tel;
+        $OrdersUsers->save();
     }
 
     /**
@@ -72,6 +74,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroi=OrdersUsers::destroy($id);
     }
 }

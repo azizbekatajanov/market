@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrdersUsers;
-use App\Models\OrdersUsersList;
+use App\Http\Requests\BrandRequest;
+use App\Http\Resources\Dashboard\BrandResource;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
-class OrdesUserController extends Controller
+class BrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +17,8 @@ class OrdesUserController extends Controller
      */
     public function index()
     {
-        $cart=OrdersUsers::all();
-        return $cart;
+        $brands = Brand::paginate(5);
+        return BrandResource::collection($brands);
     }
 
     /**
@@ -26,9 +27,10 @@ class OrdesUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BrandRequest $request)
     {
-        //
+        $brand = Brand::create($request->validated());
+        return new BrandResource($brand);
     }
 
     /**
@@ -39,7 +41,7 @@ class OrdesUserController extends Controller
      */
     public function show($id)
     {
-        $search=OrdersUsersList::where('orders_users_id',$id)->get();
+        return new BrandResource(Brand::findOrFail($id));
     }
 
     /**
@@ -49,19 +51,11 @@ class OrdesUserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BrandRequest $request, Brand $brand)
     {
-        $OrdersUsers=OrdersUsers::findOrFail($id);
-        $OrdersUsers->user_id=auth()->id();
-        $OrdersUsers->first_name=$request->first_name;
-        $OrdersUsers->last_name=$request->last_name;
-        $OrdersUsers->email=$request->email;
-        $OrdersUsers->address=$request->address;
-        $OrdersUsers->city=$request->city;
-        $OrdersUsers->country=$request->country;
-        $OrdersUsers->zip_code=$request->zip_code;
-        $OrdersUsers->tel=$request->tel;
-        $OrdersUsers->save();
+//        dd($request->id);
+        $brand->update($request->validated());
+        return new BrandResource($brand);
     }
 
     /**
@@ -72,6 +66,10 @@ class OrdesUserController extends Controller
      */
     public function destroy($id)
     {
-        $destroi=OrdersUsers::destroy($id);
+        Brand::findOrFail($id)->delete();
+        return response()->json
+        ([
+            'message' => 'Successfully deleted!'
+        ]);
     }
 }

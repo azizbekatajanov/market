@@ -39,6 +39,7 @@
 <body>
 <!-- HEADER -->
 <header>
+
     <!-- TOP HEADER -->
     <div id="top-header">
         <div class="container">
@@ -56,16 +57,21 @@
                 <ul class="header-links pull-right">
                     <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="flag-icon flag-icon-{{Config::get('languages')[App::getLocale()]['flag-icon']}}"></span> {{ Config::get('languages')[App::getLocale()]['display'] }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="/setlocale/ru"><span class="flag-icon flag-icon-ru"></span> ru</a>
-                                    <a class="dropdown-item" href="/setlocale/en"><span class="flag-icon flag-icon-us"></span> en</a>
+
+                            @foreach (config('app.available_locales') as $locale)
+                                @if ($locale != app()->getLocale())
+                                    <a class="dropdown-item" href="{{ route(\Illuminate\Support\Facades\Route::currentRouteName(), $locale) }}">
+                                        <span class="flag-icon flag-icon-{{$locale}}"></span>
+                                        {{ strtoupper($locale) }}
+                                    </a>
+                                @endif
+                            @endforeach
+
                         </div>
                     </li>
                     <h3 style="color: #fff3cd">{{__('messages.welcome')}}</h3>
                 </ul>
+
 
             @endguest
         </div>

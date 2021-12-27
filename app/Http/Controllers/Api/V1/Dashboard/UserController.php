@@ -1,33 +1,48 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
+use App\Http\Resources\Dashboard\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-
+        dd('INDEX');
+        if(isset($request->limit)) $users = User::paginate($request->limit);
+        else $users = User::all();
+        return UserResource::collection($users);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+//        dd('STORE');
+//        dd($request->validated());
+        dump($request->username);
+        dump($request->first_name);
+        dump($request->email);
+        dump($request->password);
+        $user = User::create($request->validated());
+        dump($request->all());
+        dd($user);
+//        return new UserResource($user);
     }
-
     /**
      * Display the specified resource.
      *
@@ -36,7 +51,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        return new UserResource(User::findOrFail($id));
     }
 
     /**
@@ -48,17 +63,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd('UPDATE');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        //
+        User::findOrFail($id)->delete();
+        return response()->json([
+            'message'=> 'Successfully deleted!'
+        ]);
     }
 }

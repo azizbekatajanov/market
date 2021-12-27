@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::with('product.image')->paginate(12);
+        return Category::with('product.image')->get();
     }
 
     /**
@@ -37,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return Category::with('product.image')->find($id);
     }
 
     /**

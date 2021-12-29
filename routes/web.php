@@ -43,7 +43,6 @@ use Illuminate\Support\Facades\Redirect;
 
 
 
-
 Route::group([
     'prefix' => '{locale?}',
     'where' => ['locale' => '[a-z]{2}'],
@@ -58,7 +57,9 @@ Route::group([
         return view('auth.login');
     })->name('auth.login');
 
-    Route::get('/product/{id}',[\App\Http\Controllers\HomeController::class,'product'])->middleware('auth');
+
+    Route::get('/product/'.request()->segment(3),[\App\Http\Controllers\HomeController::class,'product'])->name('product');
+
     Route::get('/checkout',[\App\Http\Controllers\HomeController::class,'checkout'])->name('checkout');
     Route::get('/store',[\App\Http\Controllers\HomeController::class,'store']);
     Route::get('/blank',[\App\Http\Controllers\HomeController::class,'blank']);

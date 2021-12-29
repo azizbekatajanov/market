@@ -11,8 +11,8 @@ class HomeController extends Controller
     }
 
 
-    public function product($id){
-
+    public function product(){
+          $id=\request()->segment(3);
         return view('productes.product',compact('id'));
     }
 

@@ -37,15 +37,15 @@ class StoreRoleRequest extends FormRequest
                 'string',
                 'required',
             ],
-            'permissions' => [
-                'required',
-                "array",
-            ],
-            'permissions.[*].id' => [
-                'integer',
-                'exists:permissions,id',
-                'array:id'
-            ],
+//            'permissions' => [
+//                'required',
+//                "array",
+//            ],
+//            'permissions.[*].id' => [
+//                'integer',
+//                'exists:permissions,id',
+//                'array:id'
+//            ],
         ];
     }
 //    public function messages()

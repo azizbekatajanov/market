@@ -32,16 +32,8 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-//        dd('STORE');
-//        dd($request->validated());
-        dump($request->username);
-        dump($request->first_name);
-        dump($request->email);
-        dump($request->password);
         $user = User::create($request->validated());
-        dump($request->all());
-        dd($user);
-//        return new UserResource($user);
+        return new UserResource($user);
     }
     /**
      * Display the specified resource.

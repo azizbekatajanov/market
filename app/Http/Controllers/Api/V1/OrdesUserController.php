@@ -4,11 +4,12 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\OrdersUsersRequest;
+use App\Http\Requests\UsersOrdersRequest;
 use App\Models\Cart;
-use App\Models\OrdersUsers;
-use App\Models\OrdersUsersList;
 use App\Models\Product;
 use App\Models\User;
+use App\Models\UserOrder;
+use App\Models\UserOrdersList;
 use Illuminate\Http\Request;
 
 class OrdesUserController extends Controller
@@ -20,7 +21,7 @@ class OrdesUserController extends Controller
      */
     public function index()
     {
-        $cart=OrdersUsers::where('user_id' ,'=',auth()->id())->get();;
+        $cart=UserOrder::all()->where('user_id','=',1);
         return $cart;
     }
 
@@ -30,10 +31,10 @@ class OrdesUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrdersUsersRequest $request)
+    public function store(UsersOrdersRequest $request)
     {
-        $OrdersUsers=new OrdersUsers();
-        $OrdersUsers->user_id=auth()->id();
+        $OrdersUsers=new UserOrder();
+        $OrdersUsers->user_id=1;
         $OrdersUsers->first_name=$request->first_name;
         $OrdersUsers->last_name=$request->last_name;
         $OrdersUsers->email=$request->email;
@@ -44,25 +45,26 @@ class OrdesUserController extends Controller
         $OrdersUsers->tel=$request->tel;
         $OrdersUsers->order_notes=$request->order_notes;
         $OrdersUsers->save();
-          $search=OrdersUsers::all()->where('user_id' ,'==',auth()->id())->sortByDesc('id')->first();
-          $usercart=Cart::where('user_id' ,'=',$search->user_id)->get();
+        $search=UserOrder::all()->where('user_id' ,'==',1)->sortByDesc('id')->first();
+        $usercart=Cart::where('user_id' ,'=',$search->user_id)->get();
+
            $sum=0;
            $price=0;
            $amount=0;
           $product=new Product();
           foreach ($usercart as $value){
 
-              $OrdersUsersList=new OrdersUsersList();
-              $OrdersUsersList->orders_users=$search->id;
-              $OrdersUsersList->user_id=$search->user_id;
-              $OrdersUsersList->product_id=$value->product_id;
-              $price=$OrdersUsersList->price=$product::findOrFail($value->product_id)->price;
-              $amount=$OrdersUsersList->amount=$value->amount;
+              $OrdersUsersList=new UserOrdersList();
+              $OrdersUsersList->user_orders_id = $search->id;
+              $OrdersUsersList->user_id	= $search->user_id;
+              $OrdersUsersList->product_id	 = $value->product_id;
+              $price=$OrdersUsersList->price	 = $product::findOrFail($value->product_id)->price;
+              $amount=$OrdersUsersList->amount	 = $value->amount;
               $OrdersUsersList->save();
               $sum+=$price*$amount;
 
           }
-          $total_amount=OrdersUsers::findOrFail($search->id);
+          $total_amount=UserOrder::findOrFail($search->id);
           $total_amount->total_amount=$sum;
           $total_amount->save();
 
@@ -78,7 +80,7 @@ class OrdesUserController extends Controller
     public function show($id)
     {
 
-      $search=OrdersUsersList::where('orders_users_id',$id)->get();
+      $search=UserOrdersList::where('user_orders_id',$id)->get();
       $search1=$search[0];
       if(auth()->id()==$search1->id){
           return $search;

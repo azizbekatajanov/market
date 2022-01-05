@@ -19,7 +19,7 @@ class CreateUserOrdersListsTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('product_id')->nullable()->constrained()->nullOnDelete()->cascadeOnUpdate();
             $table->decimal('price');
-            $table->decimal('total_amount');
+            $table->decimal('amount');
             $table->timestamps();
         });
     }

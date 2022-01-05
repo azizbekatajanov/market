@@ -39,11 +39,12 @@ class StoreRoleRequest extends FormRequest
             ],
             'permissions' => [
                 'required',
-                'array',
+                "array",
             ],
-            'permissions.*.id' => [
+            'permissions.[*].id' => [
                 'integer',
                 'exists:permissions,id',
+                'array:id'
             ],
         ];
     }

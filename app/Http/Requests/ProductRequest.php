@@ -23,8 +23,14 @@ class ProductRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->isMethod('POST')){
+            $name = "required|max:255|unique:products,name";
+        }
+        if ($this->isMethod('PUT')){
+            $name = "required|max:255|unique:products,name,{$this->product->id}";
+        }
         return [
-            'name'=>"required|max:255|unique:products,name,{$this->product->id}",
+            'name'=>$name,
             'price'=>'required|integer',
             'old_price'=>'integer',
             'quantity'=>'required|integer',

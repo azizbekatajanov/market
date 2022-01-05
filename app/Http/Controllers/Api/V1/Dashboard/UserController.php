@@ -27,8 +27,6 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return UserResource
-     *
-     * @noinspection PhpVoidFunctionResultUsedInspection
      */
     public function store(UserRequest $request)
     {
@@ -50,7 +48,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UserRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return UserResource
      */

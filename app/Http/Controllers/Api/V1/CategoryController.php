@@ -3,12 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CartRequest;
-use App\Models\Cart;
-use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class CartController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +15,7 @@ class CartController extends Controller
      */
     public function index()
     {
-
-        $cart=User::findOrFail(auth()->id())->with('cart','cart.product.image')->get();
-        return $cart;
-
-
-
+        return Category::with('product.image')->get();
     }
 
     /**
@@ -31,13 +24,9 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CartRequest $request)
+    public function store(Request $request)
     {
-         $cart=new Cart();
-         $cart->user_id=auth()->id();
-         $cart->product_id=$request->product_id;
-         $cart->amount=$request->amount;
-         $cart->save();
+        //
     }
 
     /**
@@ -48,8 +37,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $cart=User::findOrFail(auth()->id())->cart->where('id',$id);
-       return $cart;
+        return Category::with('product.image')->find($id);
     }
 
     /**
@@ -61,16 +49,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::findOrFail(auth()->id())->cart->where('id',$id);
-        if($user!="[]"){
-           $cart=Cart::findOrFail($id);
-           $cart->amount=$request->amount;
-           $cart->save();
-           return $cart;
-        }
-        else{
-           return 'error';
-        }
+        //
     }
 
     /**
@@ -81,12 +60,6 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        $user=User::findOrFail(auth()->id())->cart->where('id',$id);
-        if($user!="[]"){
-            $cart=Cart::destroy($id);
-        }
-        else{
-            return 'error';
-        }
+        //
     }
 }

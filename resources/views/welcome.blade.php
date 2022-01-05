@@ -49,6 +49,7 @@
                             <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
                         @endif
                     @endauth
+
                 </div>
             @endif
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">

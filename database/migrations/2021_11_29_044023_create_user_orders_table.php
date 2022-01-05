@@ -25,6 +25,7 @@ class CreateUserOrdersTable extends Migration
             $table->string('zip_code')->nullable();
             $table->string('tel');
             $table->decimal('total_amount')->default(0);
+            $table->text('order_notes')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

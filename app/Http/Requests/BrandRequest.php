@@ -23,8 +23,14 @@ class BrandRequest extends FormRequest
      */
     public function rules()
     {
+        if ($this->isMethod('POST')){
+            $name = "required|max:255|unique:brands,name,{$this->brand->id}";
+        }
+        if ($this->isMethod('PUT')){
+            $name = "required|max:255|unique:brands,name,{$this->brand->id}";
+        }
         return [
-            'name'=>'required|max:255|unique:brands,name'
+            'name' => $name
         ];
     }
 }

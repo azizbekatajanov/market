@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\Dashboard\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -17,12 +18,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if (isset($request->limit)){
-            $users = User::paginate($request->limit);
-        }
-        else{
-            $users = User::all();
-        }
+        if(isset($request->limit)) $users = User::paginate($request->limit);
+        else $users = User::all();
         return UserResource::collection($users);
     }
 
@@ -31,22 +28,14 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return UserResource
-     *
-     * @noinspection PhpVoidFunctionResultUsedInspection
      */
     public function store(UserRequest $request)
     {
-        $user = User::create($request->validated());
+        $user = User::create($request->validated());;
         return new UserResource($user);
     }
     /**
-* //        $user = User::create([
-* //            "username" => "UserName"
-* //            "first_name" => "firstname"
-* //            "email" => "email@mail.ru"
-* //            "password" => "12345678"
-* //            "avatar" => $request->file('avatar')->store('avatars');
-* //        ]);
+
      * Display the specified resource.
      *
      * @param  int  $id
@@ -64,7 +53,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return UserResource
      */
-    public function update(Request $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         $user->update($request->validated());
         return new UserResource($user);
@@ -80,6 +69,7 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return response()->json([
-            'message'=> 'Successfully deleted!']);
+            'message'=> 'Successfully deleted!'
+        ]);
     }
 }

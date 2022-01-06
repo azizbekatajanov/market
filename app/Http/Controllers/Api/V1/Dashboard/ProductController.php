@@ -85,10 +85,10 @@ class ProductController extends Controller
         $new_images = $request->images;
 
         foreach ($old_images as $old_image) {
-            foreach ($new_images as $key => $new_image) {
-                if ($old_image->id == $key) {
+            foreach ($new_images as $image) {
+                if ($old_image->id == $image->id) {
                     Storage::disk('product_images')->delete($old_image->name);
-                    $name = Storage::disk('product_images')->putFile($product->id, $new_image);
+                    $name = Storage::disk('product_images')->putFile($product->id, $image);
                     $old_image->name = basename($name);
                     $old_image->update();
                 }

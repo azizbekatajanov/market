@@ -34,7 +34,7 @@ class CartController extends Controller
     public function store(CartRequest $request)
     {
          $cart=new Cart();
-         $cart->user_id=auth()->id();
+         $cart->user_id=1;
          $cart->product_id=$request->product_id;
          $cart->amount=$request->amount;
          $cart->save();

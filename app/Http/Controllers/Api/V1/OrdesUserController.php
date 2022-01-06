@@ -59,7 +59,7 @@ class OrdesUserController extends Controller
               $OrdersUsersList->user_id	= $search->user_id;
               $OrdersUsersList->product_id	 = $value->product_id;
               $price=$OrdersUsersList->price	 = $product::findOrFail($value->product_id)->price;
-              $amount=$OrdersUsersList->amount	 = $value->amount;
+              $amount=$OrdersUsersList->amount	= $value->amount;
               $OrdersUsersList->save();
               $sum+=$price*$amount;
 

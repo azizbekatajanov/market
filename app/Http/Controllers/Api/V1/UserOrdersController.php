@@ -12,7 +12,7 @@ use App\Models\UserOrder;
 use App\Models\UserOrdersList;
 use Illuminate\Http\Request;
 
-class OrdesUserController extends Controller
+class UserOrdersController extends Controller
 {
     /**
      * Display a listing of the resource.

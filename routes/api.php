@@ -18,13 +18,15 @@ Route::apiResources([
     'images'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
     'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
-    'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class
+    'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class,
+    'user_orders'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
+    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
 ]);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResources([
-    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
-     'ordes_user'=>\App\Http\Controllers\Api\V1\OrdesUserController::class,
+
+
     ]);
 });
 

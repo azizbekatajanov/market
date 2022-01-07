@@ -4,6 +4,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,3 +54,9 @@ Route::prefix('dashboard')->group(function () {
         'roles'=>\App\Http\Controllers\Api\V1\Dashboard\RoleController::class
     ]);
 });
+
+
+Route::post(
+    '/products/{product_id}',
+        [App\Http\Controllers\Api\V1\RatingController::class, 'rateProduct']
+)->name('rateProduct');

@@ -62,6 +62,6 @@ Route::prefix('dashboard')->group(function (){
 //
 //Route::get('/{some_route}', function ($some_route) {
 //    return redirect(('/'.app()->getLocale().'/'.$some_route));
-//});
+});
 
 

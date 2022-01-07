@@ -57,14 +57,7 @@
                 <ul class="header-links pull-right">
                     <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @if(app()->getLocale() == 'en')
-                                <span class="flag-icon flag-icon-gb"></span> {{ app()->getLocale() }}
-                            @else
-                            <span class="flag-icon flag-icon-{{app()->getLocale()}}"></span> {{ app()->getLocale() }}
-                            @endif
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
                             @foreach (config('app.available_locales') as $locale)
                                 @if ($locale != app()->getLocale())
                                     <a class="dropdown-item" href="{{ route(\Illuminate\Support\Facades\Route::currentRouteName(), $locale) }}">
@@ -73,6 +66,7 @@
                                     </a>
                                 @endif
                             @endforeach
+
                         </div>
                     </li>
                     <h3 style="color: #fff3cd">{{__('messages.welcome')}}</h3>

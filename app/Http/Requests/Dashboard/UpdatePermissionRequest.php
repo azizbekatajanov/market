@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrandRequest extends FormRequest
+class UpdatePermissionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,6 +13,7 @@ class BrandRequest extends FormRequest
      */
     public function authorize()
     {
+//        return Gate::allows('permission_edit');
         return true;
     }
 
@@ -23,14 +24,8 @@ class BrandRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('POST')){
-            $name = "required|max:255|unique:brands,name,{$this->brand->id}";
-        }
-        if ($this->isMethod('PUT')){
-            $name = "required|max:255|unique:brands,name,{$this->brand->id}";
-        }
         return [
-            'name' => $name
+            'name'=>"required|string|max:255|unique:permissions,name,{$this->permission->id}"
         ];
     }
 }

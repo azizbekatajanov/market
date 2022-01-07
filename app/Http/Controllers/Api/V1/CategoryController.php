@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products= Product::with('image')->get();
-       return $products;
+        return Category::with('product.image')->get();
     }
 
     /**
@@ -27,15 +26,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//        $product= new Product();
-//        $product->name=$request->name;
-//        $product->price=$request->price;
-//        $product->old_price=$request->old_price;
-//        $product->availability=$request->availability;
-//        $product->count=$request->count;
-//        $product->category_id=$request->category_id;
-//        $product->save();
-//        return $product;
+        //
     }
 
     /**
@@ -46,9 +37,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
-        $ProductOne = Product::with('image')->find($id);
-        return $ProductOne;
+        return Category::with('product.image')->find($id);
     }
 
     /**

@@ -17,27 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::apiResources([
     'images'=>\App\Http\Controllers\Api\V1\ImageController::class,
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
-
     'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
     'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class,
     'user_orders'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
     'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
 ]);
-
-Route::group(['middleware' => 'auth:sanctum'], function() {
-    Route::apiResources([
-        'products' => \App\Http\Controllers\Api\V1\ProductController::class,
-        'categories' => \App\Http\Controllers\Api\V1\CategoryController::class,
-    ]);
-    }
-);
-//Route::group(['middleware' => 'auth:sanctum'], function() {
-//    Route::apiResources([
-//
-//
-//    ]);
-//});
-
 
 Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login']);

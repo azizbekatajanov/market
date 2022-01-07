@@ -15,14 +15,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-
-
-
-        $ProductAll= Product::with('image')->limit(10)->get();
-       return $ProductAll;
-
+        $products= Product::with('image')->limit(10)->get();
+        return $products;
     }
-
 
     /**
      * Display the specified resource.
@@ -32,7 +27,6 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-
         $product = Product::with('image')->find($id);
         return $product;
     }

@@ -18,7 +18,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        dd('INDEX');
         if(isset($request->limit)) $users = User::paginate($request->limit);
         else $users = User::all();
         return UserResource::collection($users);
@@ -32,14 +31,19 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
+<<<<<<< HEAD
         $user = User::create($request->validated());
+=======
+        $user = User::create($request->validated());;
+>>>>>>> 282ed67f3d1f005a12fe9d643fc37cad072c74e7
         return new UserResource($user);
     }
     /**
+
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
     public function show($id)
     {
@@ -51,11 +55,12 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return UserResource
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user)
     {
-        dd('UPDATE');
+        $user->update($request->validated());
+        return new UserResource($user);
     }
 
     /**

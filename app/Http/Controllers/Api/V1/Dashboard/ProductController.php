@@ -50,7 +50,8 @@ class ProductController extends Controller
         if($request->hasFile('images')) {
             foreach ($request->images as $image) {
                 Image::create([
-                    'name' => Storage::disk('product_images')->put("$product->id", $image),
+                    $name = Storage::disk('product_images')->putFile("$product->id", $image),
+                    'name' => basename($name),
                     'product_id' => $product->id
                 ]);
             }
@@ -75,10 +76,11 @@ class ProductController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $product
-     * @return \Illuminate\Http\JsonResponse
+     * @return Product|\Illuminate\Http\JsonResponse|int
      */
     public function update(ProductRequest $request, Product $product)
     {
+        $product->update($request->validated());
         $old_images = Image::where('product_id', $product->id)->get();
         $new_images = $request->images;
 
@@ -86,7 +88,8 @@ class ProductController extends Controller
             foreach ($new_images as $image) {
                 if ($old_image->id == $image->id) {
                     Storage::disk('product_images')->delete($old_image->name);
-                    $old_image->name = Storage::disk('product_images')->putFile($product->id, $new_image);
+                    $name = Storage::disk('product_images')->putFile($product->id, $image);
+                    $old_image->name = basename($name);
                     $old_image->update();
                 }
             }

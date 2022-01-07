@@ -50,26 +50,14 @@
             </ul>
             @auth()
             <ul class="header-links pull-right">
-                <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> My Account</a></li>
+                <li><a href="/login"><i class="fa fa-user-o"></i> My Account</a></li>
             </ul>
             @endauth
             @guest()
                 <ul class="header-links pull-right">
-                    <li><a href="{{route('auth.login')}}"><i class="fa fa-user-o"></i> Login</a></li>
-                    <li class="nav-item dropdown">
+                    <li><a href="/login"><i class="fa fa-user-o"></i> Login</a></li>
 
-                            @foreach (config('app.available_locales') as $locale)
-                                @if ($locale != app()->getLocale())
-                                    <a class="dropdown-item" href="{{ route(\Illuminate\Support\Facades\Route::currentRouteName(), $locale) }}">
-                                        <span class="flag-icon flag-icon-{{$locale}}"></span>
-                                        {{ strtoupper($locale) }}
-                                    </a>
-                                @endif
-                            @endforeach
 
-                        </div>
-                    </li>
-                    <h3 style="color: #fff3cd">{{__('messages.welcome')}}</h3>
                 </ul>
 
 

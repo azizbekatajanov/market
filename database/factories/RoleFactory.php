@@ -2,10 +2,18 @@
 
 namespace Database\Factories;
 
+use Spatie\Permission\Models\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class BrandFactory extends Factory
+class RoleFactory extends Factory
 {
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Role::class;
+
     /**
      * Define the model's default state.
      *
@@ -14,7 +22,7 @@ class BrandFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->colorName()
+            'name' => $this->faker->word,
         ];
     }
 }

@@ -16,8 +16,10 @@ class ProductController extends Controller
     public function index()
     {
 
+
         $ProductAll= Product::with('image')->limit(10)->get();
        return $ProductAll;
+
     }
 
     /**

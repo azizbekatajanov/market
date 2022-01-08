@@ -1,5 +1,7 @@
 <?php
 
+//namespace App\Http\Controllers;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::apiResources([
-    'images'=>\App\Http\Controllers\Api\V1\ImageController::class,
+    'images'=> \App\Http\Controllers\Api\V1\ImageController::class,
     'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
-    'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
-    'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class
+    'products'=> \App\Http\Controllers\Api\V1\ProductController::class,
+    'categories'=> \App\Http\Controllers\Api\V1\CategoryController::class
 ]);
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
@@ -57,6 +59,6 @@ Route::prefix('dashboard')->group(function () {
 
 
 Route::post(
-    '/products/{product_id}',
-        [App\Http\Controllers\Api\V1\RatingController::class, 'rateProduct']
-)->name('rateProduct');
+    '/product/{product}',
+        [\App\Http\Controllers\Api\V1\RatingController::class, 'rateProduct']
+)->middleware('auth:sanctum')->name('rateProduct');

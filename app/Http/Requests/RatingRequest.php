@@ -28,6 +28,7 @@ class RatingRequest extends FormRequest
         return [
             'rating' => 'nullable | integer | between:1,5',
             'comment' => 'nullable | string',
+//            'user' => 'nullable'
         ];
     }
 

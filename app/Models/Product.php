@@ -69,11 +69,12 @@ class Product extends Model
      * @param string|null $comment
      * @return Model
      */
-    public function rateProduct($user, $rating, $comment = null)
+    public function setRating($user, $rating, $comment = null)
     {
         // $this = Product
         return $this->ratings()->updateOrCreate(
-            ['user_id' => $user->id, 'product_id' => $this->id],
+            ['user_id' => $user->id,
+                'product_id' => $this->id],
             ['rating' => $rating, 'comment' => $comment]
         );
     }
@@ -83,7 +84,7 @@ class Product extends Model
      *
      * @return float
      */
-    public function rating()
+    public function getRating()
     {
         return round($this->ratings->avg('rating'), 1);
     }

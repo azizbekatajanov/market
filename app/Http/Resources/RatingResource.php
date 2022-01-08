@@ -15,7 +15,6 @@ class RatingResource extends JsonResource
     public function toArray($request)
     {
         return [
-//            'avg_rating'=>$this->getRating()
             'avg_rating'=>$this->getRating()
         ];
     }

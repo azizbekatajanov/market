@@ -26,9 +26,13 @@ Route::apiResources([
 
 Route::group(['middleware' => 'auth:sanctum'], function() {
     Route::apiResources([
-    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
-     'ordes_user'=>\App\Http\Controllers\Api\V1\OrdesUserController::class,
+        'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
+        'ordes_user'=>\App\Http\Controllers\Api\V1\OrdesUserController::class,
     ]);
+    Route::post(
+        '/product/{product}',
+        [\App\Http\Controllers\Api\V1\RatingController::class, 'rateProduct']
+    )->name('rateProduct');
 });
 
 
@@ -57,8 +61,7 @@ Route::prefix('dashboard')->group(function () {
     ]);
 });
 
+Route::middleware(['auth:sanctum'])->group(function () {
 
-Route::post(
-    '/product/{product}',
-        [\App\Http\Controllers\Api\V1\RatingController::class, 'rateProduct']
-)->middleware('auth:sanctum')->name('rateProduct');
+});
+

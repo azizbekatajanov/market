@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function (){
         'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
         'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class,
         'user_orders'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
-        'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
+        "cart"=>\App\Http\Controllers\Api\V1\CartController::class,
     ]);
 });
 

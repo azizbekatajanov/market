@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\EloquentSortable\Sortable;
+use InvalidArgumentException;
+
 
 /**
  * Class Product
@@ -47,4 +49,44 @@ class Product extends Model
         if($this->quantity > 0) return 1;
         else return 0;
     }
+
+
+    /**************************************(Nurlan)***********************************************
+     * One-to-Many Relationship Product-Rating. Get all ratings for the product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
+    /**
+     * Rate the product.
+     *
+     * @param \Illuminate\Contracts\Auth\Authenticatable $user
+     * @param int $rating
+     * @param string|null $comment
+     * @return Model
+     */
+    public function setRating($user, $rating, $comment = null)
+    {
+        // $this = Product
+        return $this->ratings()->updateOrCreate(
+            ['user_id' => $user->id,
+                'product_id' => $this->id],
+            ['rating' => $rating, 'comment' => $comment]
+        );
+    }
+
+    /**
+     * Fetch the average rating for the product.
+     *
+     * @return float
+     */
+    public function getRating()
+    {
+        return round($this->ratings->avg('rating'), 1);
+    }
+
 }

@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->hasMany(Image::class,'product_id');
     }
 
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
+    }
+
     protected $appends = ['full_name'];
     public function getFullNameAttribute()
     {

@@ -1,8 +1,11 @@
 <?php
 
+//namespace App\Http\Controllers;
+
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +17,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:sanctum')->group(function (){
-    Route::apiResources([
-        'images'=>\App\Http\Controllers\Api\V1\ImageController::class,
-        'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
-        'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
-        'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class,
-        'user_orders'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
-        "cart"=>\App\Http\Controllers\Api\V1\CartController::class,
-    ]);
-});
-
+Route::apiResources([
+    'images'=> \App\Http\Controllers\Api\V1\ImageController::class,
+    'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
+    'products'=> \App\Http\Controllers\Api\V1\ProductController::class,
+    'categories'=> \App\Http\Controllers\Api\V1\CategoryController::class,
+    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
+    'orders_user'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
+]);
 
 Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login']);
@@ -50,3 +50,11 @@ Route::prefix('dashboard')->group(function () {
         'roles'=>\App\Http\Controllers\Api\V1\Dashboard\RoleController::class
     ]);
 });
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post(
+        '/product/{product}',
+        [\App\Http\Controllers\Api\V1\RatingController::class, 'rateProduct']
+    )->name('rateProduct');
+});
+

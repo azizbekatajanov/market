@@ -6,6 +6,10 @@
 .env
 .env.backup
 .phpunit.result.cache
+composer.json
+composer.lock
+package.json
+package-lock.json
 docker-compose.override.yml
 Homestead.json
 Homestead.yaml
@@ -13,7 +17,3 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-composer.json
-composer.lock
-package-lock.json
-package.json

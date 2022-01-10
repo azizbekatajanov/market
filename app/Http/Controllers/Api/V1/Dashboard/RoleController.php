@@ -40,7 +40,7 @@ class RoleController extends Controller
     public function store(StoreRoleRequest $request)
     {
 //        dd($request->all());
-        $role = Role::create($request->validated());
+        $role = Role::create($request->only('name'));
         $role->permissions()->sync($request->input("permissions.*.id", []));
         return (new RoleResource($role))->response()->setStatusCode(Response::HTTP_CREATED);
     }
@@ -66,7 +66,7 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        $role->update($request->validated());
+        $role->update($request->only('name'));
         $role->permissions()->sync($request->input('permissions.*.id',[]));
         return (new RoleResource($role))->response()->setStatusCode(Response::HTTP_ACCEPTED);
     }

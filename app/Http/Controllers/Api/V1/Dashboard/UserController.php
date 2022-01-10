@@ -7,6 +7,7 @@ use App\Http\Requests\UserRequest;
 use App\Http\Resources\Dashboard\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -27,12 +28,10 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return UserResource
-     *
-     * @noinspection PhpVoidFunctionResultUsedInspection
      */
     public function store(UserRequest $request)
     {
-        $user = User::create($request->validated());
+        $user = User::create($request->validated());;
         return new UserResource($user);
     }
     /**
@@ -50,7 +49,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\UserRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return UserResource
      */

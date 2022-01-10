@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BrandRequest extends FormRequest
+class UsersOrdersRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,15 @@ class BrandRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->isMethod('POST')){
-            $name = "required|max:255|unique:brands,name,{$this->brand->id}";
-        }
-        if ($this->isMethod('PUT')){
-            $name = "required|max:255|unique:brands,name,{$this->brand->id}";
-        }
         return [
-            'name' => $name
+            'first_name'=>'required|max:255',
+            'last_name'=>'required|max:255',
+            'email'=>'required|max:255|email',
+            'address'=>'required|max:255',
+            'city'=>'required|max:255',
+            'country'=>'required|max:255',
+            'zip_code'=>'required|integer',
+            'tel'=>'required|max:13|string',
         ];
     }
 }

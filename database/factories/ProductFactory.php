@@ -14,7 +14,13 @@ class ProductFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'brand_id'=>rand(1,30),
+            'name'=>$this->faker->name(),
+            'price'=>$this->faker->randomFloat($nbMaxDecimals =8, $min = 1, $max =9999),
+            'old_price'=>$this->faker->randomFloat($nbMaxDecimals =8, $min = 1, $max =9999),
+            'quantity'=>rand(0,1),
+            'amount'=>rand(1,9999),
+            'category_id'=>rand(1,30),
         ];
     }
 }

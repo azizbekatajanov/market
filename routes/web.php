@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Redirect;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< HEAD
 Route::get('/',[\App\Http\Controllers\HomeController::class,'index'])->name('homepage');
 
 //Route::view('/login', 'auth.login')->name('auth.login');
@@ -35,3 +36,5 @@ Route::prefix('dashboard')->group(function (){
     Route::view('/categories', 'dashboard.categories.index')->name('categories.index');
 });
 
+=======
+>>>>>>> 6278913b1bf307b5454c57a06420f8ab3fdf78f4

@@ -17,11 +17,7 @@ class CartController extends Controller
      */
     public function index()
     {
-
-        $cart=User::findOrFail(auth()->id())->with('cart','cart.product.image')->get();
-        return $cart;
-
-
+        return User::with('cart.product.image')->findOrFail(auth()->id());
 
     }
 
@@ -34,7 +30,7 @@ class CartController extends Controller
     public function store(CartRequest $request)
     {
          $cart=new Cart();
-         $cart->user_id=1;
+         $cart->user_id=auth()->id();
          $cart->product_id=$request->product_id;
          $cart->amount=$request->amount;
          $cart->save();
@@ -48,7 +44,8 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $cart=User::findOrFail(auth()->id())->cart->where('id',$id);
+        $cart=Cart::all()->where('user_id','==',auth()->id())->where('id','==',$id);
+;
        return $cart;
     }
 
@@ -61,7 +58,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user=User::findOrFail(1)->cart->where('id',$id);
+        $user=User::findOrFail(auth()->id())->cart->where('id',$id);
         if($user!="[]"){
            $cart=Cart::findOrFail($id);
            $cart->amount=$request->amount;
@@ -77,16 +74,18 @@ class CartController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        $user=User::findOrFail(1)->cart->where('id',$id);
+        $user=User::findOrFail(auth()->id())->cart->where('id',$id);
         if($user!="[]"){
             $cart=Cart::destroy($id);
         }
         else{
-            return 'error';
+            return response()->json([
+                "message"=> "Error"
+            ]);
         }
     }
 }

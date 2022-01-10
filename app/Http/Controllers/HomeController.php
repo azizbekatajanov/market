@@ -13,8 +13,14 @@ class HomeController extends Controller
         return view('index');
     }
 
+<<<<<<< HEAD
     public function product($id){
 
+=======
+
+    public function product(){
+          $id=\request()->segment(3);
+>>>>>>> 6278913b1bf307b5454c57a06420f8ab3fdf78f4
         return view('productes.product',compact('id'));
     }
 
@@ -28,4 +34,5 @@ class HomeController extends Controller
     public function blank(){
         return view('blank.blank');
     }
+
 }

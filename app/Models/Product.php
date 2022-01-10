@@ -80,7 +80,7 @@ class Product extends Model
     }
 
     /**
-     * Fetch the average rating for the task.
+     * Fetch the average rating for the product.
      *
      * @return float
      */

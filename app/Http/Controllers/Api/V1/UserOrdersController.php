@@ -21,8 +21,7 @@ class UserOrdersController extends Controller
      */
     public function index()
     {
-        $user = auth()->id();
-        $cart=UserOrder::all()->where('user_id','=', $user);
+        $cart=UserOrder::all()->where('user_id','=',auth()->id());
         return $cart;
     }
 
@@ -35,7 +34,7 @@ class UserOrdersController extends Controller
     public function store(UsersOrdersRequest $request)
     {
         $OrdersUsers=new UserOrder();
-        $OrdersUsers->user_id=1;
+        $OrdersUsers->user_id=auth()->id();
         $OrdersUsers->first_name=$request->first_name;
         $OrdersUsers->last_name=$request->last_name;
         $OrdersUsers->email=$request->email;
@@ -46,7 +45,7 @@ class UserOrdersController extends Controller
         $OrdersUsers->tel=$request->tel;
         $OrdersUsers->order_notes=$request->order_notes;
         $OrdersUsers->save();
-        $search=UserOrder::all()->where('user_id' ,'==',1)->sortByDesc('id')->first();
+        $search=UserOrder::all()->where('user_id' ,'==',auth()->id())->sortByDesc('id')->first();
         $usercart=Cart::where('user_id' ,'=',$search->user_id)->get();
 
            $sum=0;

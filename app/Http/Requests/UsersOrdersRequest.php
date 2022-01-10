@@ -29,8 +29,7 @@ class UsersOrdersRequest extends FormRequest
             'email'=>'required|max:255|email',
             'address'=>'required|max:255',
             'city'=>'required|max:255',
-            'category_id'=>'required|integer',
-            'country'=>'required|integer',
+            'country'=>'required|max:255',
             'zip_code'=>'required|integer',
             'tel'=>'required|max:13|string',
         ];

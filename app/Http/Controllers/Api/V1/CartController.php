@@ -18,10 +18,7 @@ class CartController extends Controller
     public function index()
     {
 
-        $cart=User::findOrFail(1)->with('cart.product.image')->get();
-        return $cart;
-
-
+        return User::with('cart.product.image')->findOrFail(auth()->id());
 
     }
 
@@ -34,7 +31,7 @@ class CartController extends Controller
     public function store(CartRequest $request)
     {
          $cart=new Cart();
-         $cart->user_id=1;
+         $cart->user_id=auth()->id();
          $cart->product_id=$request->product_id;
          $cart->amount=$request->amount;
          $cart->save();
@@ -48,7 +45,8 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $cart=User::findOrFail(auth()->id())->cart->where('id',$id);
+        $cart=Cart::all()->where('user_id','==',auth()->id())->where('id','==',$id);
+;
        return $cart;
     }
 

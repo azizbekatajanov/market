@@ -14,14 +14,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::apiResources([
-    'images'=>\App\Http\Controllers\Api\V1\ImageController::class,
-    'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
-    'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
-    'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class,
-    'user_orders'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
-    'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
-]);
+Route::middleware('auth:sanctum')->group(function (){
+    Route::apiResources([
+        'images'=>\App\Http\Controllers\Api\V1\ImageController::class,
+        'contacts' => \App\Http\Controllers\Api\V1\Dashboard\ContactController::class,
+        'products'=>\App\Http\Controllers\Api\V1\ProductController::class,
+        'categories'=>\App\Http\Controllers\Api\V1\CategoryController::class,
+        'user_orders'=>\App\Http\Controllers\Api\V1\UserOrdersController::class,
+        'cart'=>\App\Http\Controllers\Api\V1\CartController::class,
+    ]);
+});
+
 
 Route::post('/register',[\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
 Route::post('/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'login']);

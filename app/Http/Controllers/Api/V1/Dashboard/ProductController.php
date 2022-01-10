@@ -41,6 +41,7 @@ class ProductController extends Controller
     {
         $product = Product::create([
             'name'=>$request->name,
+            'description'=>$request->description,
             'price'=>$request->price,
             'old_price'=>$request->old_price,
             'quantity'=>$request->quantity,

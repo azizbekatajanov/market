@@ -18,7 +18,7 @@ class CartController extends Controller
     public function index()
     {
 
-        $cart=User::findOrFail(1)->with('cart.product.image')->get();
+        $cart=User::with('cart.product.image')->find(Auth()->id());
         return $cart;
 
 

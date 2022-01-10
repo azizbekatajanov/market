@@ -21,7 +21,8 @@ class UserOrdersController extends Controller
      */
     public function index()
     {
-        $cart=UserOrder::all()->where('user_id','=',1);
+        $user = auth()->id();
+        $cart=UserOrder::all()->where('user_id','=', $user);
         return $cart;
     }
 

@@ -30,7 +30,6 @@ class Product extends Model
     public function brand(){
         return $this->belongsTo(Brand::class)->select('id','name');
     }
-
     public function category() {
         return $this->belongsTo(Category::class)->select('id', 'name');
     }

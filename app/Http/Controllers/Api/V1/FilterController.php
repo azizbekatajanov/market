@@ -3,17 +3,27 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Type;
+use Spatie\QueryBuilder\QueryBuilder;
+
 class FilterController extends Controller
 {
+    // WAITING FOR FRONTEND TO BE DONE, TO REWRITE CODE APPROPRIATELY
+//
+//    public function filter() {
+//        return QueryBuilder::for(Product::class)
+//            ->allowedFilters();
+//    }
 
     // SHOW ALL
     public function show_all(Request $request) {
-        if(isset($request->limit)) return DB::table('products')->paginate($request->limit);
-        else return DB::table('products')->paginate(30);
+        return DB::select("CALL GetUserById(2)");
+//        if(isset($request->limit)) return DB::table('products')->paginate($request->limit);
+//        else return DB::table('products')->paginate(30);
     }
 
     public function filter(Request $request)
@@ -47,8 +57,8 @@ class FilterController extends Controller
     public function topselling() {
 
     // TOP SELLING
-    $top_selling = DB::table('users')
-        ->select(DB::raw('select name, SUM(Amount) from test'))
+    $top_selling = User::
+        select(DB::raw('select name, SUM(Amount) from test'))
         ->groupBy(name)
         ->orderByDesc(SUM(Amount))
         ->limit(3)
@@ -58,9 +68,9 @@ class FilterController extends Controller
 
     // MIN-MAX PRICE
     public function minmax_price() {
-        $minprice = DB::table('products')->min('price');
-        $maxprice =  DB::table('products')->max('price');
-        $minmax = DB::table('products')->whereIn('price', [$minprice, $maxprice])->get();
-        return $minmax;
+////        return DB::SELECT("CALL MinMaxPrice");
+//        return Product::
+//
+//            ->get();
     }
 }

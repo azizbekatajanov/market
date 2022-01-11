@@ -90,4 +90,9 @@ class Product extends Model
         return round($this->ratings->avg('rating'), 1);
     }
 
+    public function getAverageRating()
+    {
+//        dd($this->ratings()->get()->all());
+        return $this->with["ratings"];
+    }
 }

@@ -31,10 +31,7 @@ Route::post('/login', [\App\Http\Controllers\Api\V1\AuthController::class, 'logi
 Route::post('/me', [\App\Http\Controllers\Api\V1\AuthController::class, 'me'])->middleware('auth:sanctum');
 
 // Routes For Filter Controller
-Route::get('/store', [\App\Http\Controllers\Api\v1\FilterController::class, 'show_all']);
-Route::get('/store/top_selling', [\App\Http\Controllers\Api\v1\FilterController::class, 'topselling']);
-Route::get('/store/filter', [\App\Http\Controllers\Api\v1\FilterController::class, 'filter']);
-Route::get('/store/minmax', [\App\Http\Controllers\Api\v1\FilterController::class, 'minmax_price']);
+Route::get('sort', [\App\Http\Controllers\Api\v1\FilterController::class, 'sort']);
 
 
 Route::prefix('dashboard')->group(function () {

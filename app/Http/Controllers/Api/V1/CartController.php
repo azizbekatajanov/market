@@ -29,6 +29,8 @@ class CartController extends Controller
      */
     public function store(CartRequest $request)
     {
+
+
          $cart=new Cart();
          $cart->user_id=auth()->id();
          $cart->product_id=$request->product_id;
@@ -44,9 +46,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $cart=Cart::all()->where('user_id','==',auth()->id())->where('id','==',$id);
-;
-       return $cart;
+        return $cart=Cart::all()->where('user_id','==',auth()->id())->where('id','==',$id);
     }
 
     /**
@@ -61,8 +61,12 @@ class CartController extends Controller
         $user=User::findOrFail(auth()->id())->cart->where('id',$id);
         if($user!="[]"){
            $cart=Cart::findOrFail($id);
-           $cart->amount=$request->amount;
-           $cart->save();
+           if($request->amount!=0){
+               $cart->amount=$request->amount;
+               $cart->save();
+           }else{
+               return "amount = 0";
+           }
            return $cart;
         }
         else{

@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Dashboard;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\OrdersUsers;
-use App\Models\OrdersUsersList;
-use App\Models\UserOrder;
-use App\Models\UserOrdersItem;
+use App\Models\Cart;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class UserOrderController extends Controller
+class UserOrdersListController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return UserOrder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $cart=UserOrder::all();
-        return $cart;
+       return User::with('UserOrder.UserOrderItems.productName.image')->findOrFail(auth()->id());
+
+
+
     }
 
     /**
@@ -41,7 +41,7 @@ class UserOrderController extends Controller
      */
     public function show($id)
     {
-        $search=UserOrdersItem::where('orders_users_id',$id)->get();
+        //
     }
 
     /**
@@ -53,17 +53,7 @@ class UserOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $OrdersUsers=UserOrder::findOrFail($id);
-        $OrdersUsers->user_id=auth()->id();
-        $OrdersUsers->first_name=$request->first_name;
-        $OrdersUsers->last_name=$request->last_name;
-        $OrdersUsers->email=$request->email;
-        $OrdersUsers->address=$request->address;
-        $OrdersUsers->city=$request->city;
-        $OrdersUsers->country=$request->country;
-        $OrdersUsers->zip_code=$request->zip_code;
-        $OrdersUsers->tel=$request->tel;
-        $OrdersUsers->save();
+        //
     }
 
     /**
@@ -74,6 +64,6 @@ class UserOrderController extends Controller
      */
     public function destroy($id)
     {
-        $destroi=OrdersUsers::destroy($id);
+        //
     }
 }

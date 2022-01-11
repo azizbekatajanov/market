@@ -42,7 +42,7 @@ class Product extends Model
         return $this->hasMany(Image::class)->select('id','name','product_id');
     }
     public function topselling() {
-        return $this->hasMany(UserOrdersList::class);
+        return $this->hasMany(UserOrdersList::class);//->limit(1);
     }
 
     protected $appends = ['availability'];
@@ -72,10 +72,8 @@ class Product extends Model
      */
     public function setRating($user, $rating, $comment = null)
     {
-        // $this = Product
         return $this->ratings()->updateOrCreate(
-            ['user_id' => $user->id,
-                'product_id' => $this->id],
+            ['user_id' => $user->id, 'product_id' => $this->id],
             ['rating' => $rating, 'comment' => $comment]
         );
     }
@@ -87,7 +85,7 @@ class Product extends Model
      */
     public function getRating()
     {
-        return round($this->ratings->avg('rating'), 1);
+        return round($this->ratings()->avg('rating'), 1);
     }
 
 }

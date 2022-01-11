@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1\dashboard;
+namespace App\Http\Controllers\Api\V1\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;

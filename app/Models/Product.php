@@ -39,7 +39,9 @@ class Product extends Model
     public function image(){
         return $this->hasMany(Image::class)->select('id','name','product_id');
     }
-
+    public function topselling() {
+        return $this->hasMany(UserOrdersList::class);
+    }
 
     protected $appends = ['availability'];
     public function getAvailabilityAttribute() {

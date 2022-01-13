@@ -13,10 +13,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products= Product::with('image')->limit(10)->get();
-        return $products;
+        if(isset($request->limit)) {
+             $products = Product::with('image')->limit($request->limit)->get();
+        }
+        else $products = Product::with('image')->limit(10)->get();
+
+        $object = new \stdClass();
+        $object->products = $products;
+        $object->max_price = Product::max('price');
+
+        return $object;
     }
 
     /**
@@ -27,7 +35,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//        $product= new Product();
+//        $product = new Product();
 //        $product->name=$request->name;
 //        $product->price=$request->price;
 //        $product->old_price=$request->old_price;
@@ -46,8 +54,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::with('image')->find($id);
-        return $product;
+        return Product::with('image')->find($id);
     }
 
 }

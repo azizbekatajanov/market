@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Query\Builder;
+use newrelic\DistributedTracePayload;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\EloquentSortable\Sortable;
 use InvalidArgumentException;
@@ -41,8 +42,8 @@ class Product extends Model
     public function image(){
         return $this->hasMany(Image::class)->select('id','name','product_id');
     }
-    public function topselling() {
-        return $this->hasMany(UserOrdersList::class);//->limit(1);
+    public function top_selling() {
+        return $this->hasMany(UserOrdersList::class);
     }
 
     protected $appends = ['availability'];
@@ -50,7 +51,6 @@ class Product extends Model
         if($this->quantity > 0) return 1;
         else return 0;
     }
-
 
     /**************************************(Nurlan)***********************************************
      * One-to-Many Relationship Product-Rating. Get all ratings for the product.

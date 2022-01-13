@@ -9,6 +9,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Type;
 use Spatie\QueryBuilder\AllowedInclude;
+use Spatie\QueryBuilder\AllowedSort;
 use Spatie\QueryBuilder\QueryBuilder;
 
 use Spatie\QueryBuilder\Includes\IncludeInterface;
@@ -33,16 +34,39 @@ class AggregateInclude implements IncludeInterface
     }
 }
 
+class TopByRating implements \Spatie\QueryBuilder\Sorts\Sort
+{
+    public function __invoke(Builder $query, bool $descending, string $property)
+    {
+        $direction = $descending ? 'DESC' : 'ASC';
+        $query->orderByRaw("(`{$property}`) {$direction}");
+    }
+}
+class TopFiveProducts implements \Spatie\QueryBuilder\Sorts\Sort
+{
+    public function __invoke(Builder $query, bool $descending, string $property)
+    {
+        $direction = $descending ? 'DESC' : 'ASC';
+        $query->orderByRaw("(`{$property}`) {$direction}")
+        ->limit(2);
+    }
+}
+
 class FilterController extends Controller
 {
     public function sort() {
         return QueryBuilder::for(Product::class)
             ->allowedIncludes([
                 'category',
-                'topselling',
-                AllowedInclude::custom('Rating', new AggregateInclude('rating', 'avg'), 'ratings'),
+                'top_selling',
+                AllowedInclude::custom('rating', new AggregateInclude('rating', 'avg'), 'ratings'),
                 ])
-            ->allowedSorts(['products.price', 'topselling_count'])
+            ->allowedSorts([
+                'products.price',
+                'top_selling_count',
+                AllowedSort::custom('rating', new TopByRating(), 'ratings_avg_rating'),
+                AllowedSort::custom('top_five_products', new TopFiveProducts(), 'top_selling_count'),
+            ])
             ->get();
     }
 }

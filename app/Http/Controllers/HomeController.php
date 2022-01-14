@@ -7,11 +7,24 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(){
-        $id=1;
-        return view('index',compact('id'));
-
-//        readfile('/api/category');
-
         return view('index');
     }
+
+
+    public function product(){
+          $id=\request()->segment(3);
+        return view('productes.product',compact('id'));
+    }
+
+    public function checkout(){
+        return view('checkout.checkout');
+    }
+
+    public function store(){
+        return view('store.store');
+    }
+    public function blank(){
+        return view('blank.blank');
+    }
+
 }

@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-         $category_all=Category::all();
-        return $category_all;
+        return Category::with('product.image')->get();
     }
 
     /**
@@ -38,7 +37,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return Category::with('product.image')->find($id);
     }
 
     /**

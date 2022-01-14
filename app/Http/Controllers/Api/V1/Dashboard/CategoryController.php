@@ -13,18 +13,24 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(Request $request)
     {
-        return CategoryResource::collection(Category::all());
+        if(isset($request->limit)) {
+            $categories = Category::paginate($request->limit);
+        }
+        else {
+            $categories = Category::all();
+        }
+        return CategoryResource::collection($categories);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return CategoryResource
      */
     public function store(CategoryRequest $request)
     {
@@ -36,7 +42,7 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
     public function show($id)
     {
@@ -46,14 +52,13 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return CategoryResource
      */
     public function update(CategoryRequest $request,Category $category)
     {
         $category->update($request->validated());
-
         return new CategoryResource($category);
     }
 
@@ -61,10 +66,12 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function destroy($id)
     {
-        //
+        Category::findOrFail($id)->delete();
+        return response()->json([
+            'message'=> 'Successfully deleted!']);
     }
 }

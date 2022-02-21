@@ -1,8 +1,7 @@
 <?php
 
-use App\Http\Controllers\Dashboard\MainController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Redirect;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[\App\Http\Controllers\HomeController::class,'index']);
+/*NULL*/

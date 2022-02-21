@@ -84,6 +84,27 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application Available Locales
+    |--------------------------------------------------------------------------
+    |
+    | The application locale determines the default locale that will be used
+    | by the translation service provider. BLA BLA BLA BLA BLA BLA BLA BLA BLA
+    | BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA
+    | BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA
+    | BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA
+    | BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA BLA.
+    |
+    */
+
+    'available_locales' => [
+        'en',
+        'fr',
+        'es',
+        'ru',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Fallback Locale
     |--------------------------------------------------------------------------
     |
@@ -161,7 +182,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        \Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */
